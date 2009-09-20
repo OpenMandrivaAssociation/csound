@@ -80,6 +80,88 @@ restricted to any style of music, having been used for many years in
 at least classical, pop, techno, ambient...
 
 
+%files -f %{name}5.lang
+%defattr(-,root,root,-)
+%doc COPYING ChangeLog readme-csound5.txt
+%{_bindir}/cs-launcher
+%{_bindir}/csb64enc
+%{_bindir}/csound
+%{_bindir}/cvanal
+%{_bindir}/dnoise
+%{_bindir}/cs-envext
+%{_bindir}/cs-extract
+%{_bindir}/cs-extractor
+%{_bindir}/het_export
+%{_bindir}/het_import
+%{_bindir}/hetro
+%{_bindir}/lpanal
+%{_bindir}/lpc_export
+%{_bindir}/lpc_import
+%{_bindir}/makecsd
+%{_bindir}/cs-mixer
+%{_bindir}/pvanal
+%{_bindir}/pvlook
+%{_bindir}/cs-scale
+%{_bindir}/cs-scot
+%{_bindir}/scsort
+%{_bindir}/cs-sndinfo
+%{_bindir}/cs-srconv
+%{_bindir}/pv_export
+%{_bindir}/pv_import
+%{_libdir}/lib%{name}.so.5.2
+%{_libdir}/libcsnd.so.5.2
+%dir %{_libdir}/%{name}/plugins
+%{_libdir}/%{name}/plugins/libambicode1.so
+%{_libdir}/%{name}/plugins/libampmidid.so
+%{_libdir}/%{name}/plugins/libbabo.so
+%{_libdir}/%{name}/plugins/libbarmodel.so
+%{_libdir}/%{name}/plugins/libcompress.so
+%{_libdir}/%{name}/plugins/libcontrol.so
+%{_libdir}/%{name}/plugins/libchua.so
+%{_libdir}/%{name}/plugins/libcs_date.so
+%{_libdir}/%{name}/plugins/libcs_pan2.so
+%{_libdir}/%{name}/plugins/libcs_pvs_ops.so
+%{_libdir}/%{name}/plugins/libeqfil.so
+%{_libdir}/%{name}/plugins/libftest.so
+%{_libdir}/%{name}/plugins/libgabnew.so
+%{_libdir}/%{name}/plugins/libgrain4.so
+%{_libdir}/%{name}/plugins/libhrtferX.so
+%{_libdir}/%{name}/plugins/libhrtfnew.so
+%{_libdir}/%{name}/plugins/libimage.so
+%{_libdir}/%{name}/plugins/libloscilx.so
+%{_libdir}/%{name}/plugins/libminmax.so
+%{_libdir}/%{name}/plugins/libmixer.so
+%{_libdir}/%{name}/plugins/libmodal4.so
+%{_libdir}/%{name}/plugins/libmutexops.so
+%{_libdir}/%{name}/plugins/liboggplay.so
+%{_libdir}/%{name}/plugins/libpartikkel.so
+%{_libdir}/%{name}/plugins/libphisem.so
+%{_libdir}/%{name}/plugins/libphysmod.so
+%{_libdir}/%{name}/plugins/libpitch.so
+%{_libdir}/%{name}/plugins/libptrack.so
+%{_libdir}/%{name}/plugins/libpvoc.so
+%{_libdir}/%{name}/plugins/libpvsbuffer.so
+%{_libdir}/%{name}/plugins/libpy.so
+%{_libdir}/%{name}/plugins/librtalsa.so
+%{_libdir}/%{name}/plugins/librtpulse.so
+%{_libdir}/%{name}/plugins/libscansyn.so
+%{_libdir}/%{name}/plugins/libscoreline.so
+%{_libdir}/%{name}/plugins/libsfont.so
+%{_libdir}/%{name}/plugins/libshape.so
+%{_libdir}/%{name}/plugins/libstackops.so
+%{_libdir}/%{name}/plugins/libstdopcod.so
+%{_libdir}/%{name}/plugins/libstdutil.so
+%{_libdir}/%{name}/plugins/libsystem_call.so
+%{_libdir}/%{name}/plugins/libudprecv.so
+%{_libdir}/%{name}/plugins/libudpsend.so
+%{_libdir}/%{name}/plugins/libvbap.so
+%{_libdir}/%{name}/plugins/libharmon.so
+%{_libdir}/%{name}/plugins/libugakbari.so
+%{_libdir}/%{name}/plugins/libvaops.so
+%{_libdir}/%{name}/plugins/libvosim.so
+
+#--------------------------------------------------------------------
+
 %package devel
 Summary: Csound development files and libraries
 Group: Development/Libraries
@@ -88,6 +170,13 @@ Obsoletes: olpcsound-devel <= 5.08.92
 
 %description devel
 Contains headers and libraries for developing applications that use Csound.
+
+%files devel
+%defattr(-,root,root,-)
+%{_includedir}/%{name}/
+%{_libdir}/lib%{name}.so
+
+#--------------------------------------------------------------------
 
 %package python
 Summary: Python Csound development files and libraries
@@ -98,6 +187,13 @@ Requires: python
 %description python
 Contains Python language bindings for developing Python applications that
 use Csound.
+
+%files python
+%defattr(-,root,root,-)
+%{_libdir}/libcsnd.so
+%{_libdir}/python%{pyver}/site-packages/*
+
+#--------------------------------------------------------------------
 
 %package java
 Summary: Java Csound support
@@ -114,12 +210,37 @@ Requires(postun): java-gcj-compat
 Contains Java language bindings for developing and running Java
 applications that use Csound.
 
+%post java
+if [ -x %{_bindir}/rebuild-gcj-db ]; then
+  %{_bindir}/rebuild-gcj-db
+fi
+
+%postun java
+if [ -x %{_bindir}/rebuild-gcj-db ]; then
+  %{_bindir}/rebuild-gcj-db
+fi
+
+%files java
+%defattr(-,root,root,-)
+%{_libdir}/lib_jcsound.so
+%{_libdir}/%{name}/java/
+%{_javadir}/csnd.jar
+%attr(-,root,root) %{_libdir}/gcj/%{name}
+
+#--------------------------------------------------------------------
+
 %package javadoc
 Summary: API documentation for Java Csound support
 Group: Documentation
 
 %description javadoc
 API documentation for the %{name}-java package.
+
+%files javadoc
+%defattr(-,root,root,-)
+%doc %{_javadocdir}/%{name}-java
+
+#--------------------------------------------------------------------
 
 %package tk
 Summary: Tcl/Tk related Csound utilities
@@ -130,6 +251,18 @@ Requires: tcl tk
 %description tk
 Contains Tcl/Tk related Csound utilities
 
+%files tk
+%defattr(-,root,root,-)
+%{_libdir}/%{name}/tcl/
+%{_bindir}/matrix.tk
+%{_bindir}/brkpt
+%{_bindir}/linseg
+%{_bindir}/tabdes
+%{_bindir}/cstclsh
+%{_bindir}/cswish
+
+#--------------------------------------------------------------------
+
 %package gui
 Summary: A FLTK-based GUI for Csound
 Group: Applications/Multimedia
@@ -138,6 +271,12 @@ Requires: fltk xdg-utils
 
 %description gui
 Contains a FLTK-based GUI for Csound
+
+%files gui
+%defattr(-,root,root,-)
+%{_bindir}/csound5gui
+
+#--------------------------------------------------------------------
 
 %package fltk
 Summary: FLTK plugins for Csound
@@ -148,6 +287,12 @@ Requires: fltk
 %description fltk
 Contains FLTK plugins for csound
 
+%files fltk
+%defattr(-,root,root,-)
+%{_libdir}/%{name}/plugins/libwidgets.so
+
+#--------------------------------------------------------------------
+
 %package jack
 Summary: Jack Audio plugins for Csound
 Group: Applications/Multimedia
@@ -157,6 +302,13 @@ Requires: jack-audio-connection-kit
 %description jack
 Contains Jack Audio plugins for Csound
 
+%files jack
+%defattr(-,root,root,-)
+%{_libdir}/%{name}/plugins/librtjack.so
+%{_libdir}/%{name}/plugins/libjackTransport.so
+
+#--------------------------------------------------------------------
+
 %package fluidsynth
 Summary: Fluidsyth soundfont plugin for Csound
 Group: Applications/Multimedia
@@ -164,6 +316,12 @@ Requires: %{name} = %{version}-%{release}
 
 %description fluidsynth
 Contains Fluidsynth soundfont plugin for Csound.
+
+%files fluidsynth
+%defattr(-,root,root,-)
+%{_libdir}/%{name}/plugins/libfluidOpcodes.so
+
+#--------------------------------------------------------------------
 
 %package dssi
 Summary: Disposable Soft Synth Interface (DSSI) plugin for Csound
@@ -174,6 +332,12 @@ Requires: dssi
 %description dssi
 Disposable Soft Synth Interface (DSSI) plugin for Csound
 
+%files dssi
+%defattr(-,root,root,-)
+%{_libdir}/%{name}/plugins/libdssi4cs.so
+
+#--------------------------------------------------------------------
+
 %package osc
 Summary: Open Sound Control (OSC) plugin for Csound
 Group: Applications/Multimedia
@@ -181,6 +345,12 @@ Requires: %{name} = %{version}-%{release}
 
 %description osc
 Open Sound Control (OSC) plugin for Csound
+
+%files osc
+%defattr(-,root,root,-)
+%{_libdir}/%{name}/plugins/libosc.so
+
+#--------------------------------------------------------------------
 
 %package virtual-keyboard
 Summary: Virtual MIDI keyboard plugin for Csound
@@ -191,6 +361,12 @@ Requires: fltk
 %description virtual-keyboard
 A virtual MIDI keyboard plugin for Csound
 
+%files virtual-keyboard
+%defattr(-,root,root,-)
+%{_libdir}/%{name}/plugins/libvirtual.so
+
+#--------------------------------------------------------------------
+
 %package manual
 Summary: Csound manual
 Group: Documentation
@@ -200,6 +376,13 @@ BuildArch: noarch
 %description manual
 Canonical Reference Manual for Csound.
 
+%files manual
+%defattr(-,root,root,-)
+#%doc manual/copying.txt manual/credits.txt manual/readme.txt manual/news.txt
+#%doc manual/html/*
+#%doc manual/examples
+
+#--------------------------------------------------------------------
 
 %prep
 %setup -q -n Csound5.10.1
@@ -287,160 +470,3 @@ install -dm 644 %{buildroot}%{_javadocdir}/%{name}-java
 
 %clean
 %{__rm} -rf %{buildroot}
-
-%post java
-if [ -x %{_bindir}/rebuild-gcj-db ]; then
-  %{_bindir}/rebuild-gcj-db
-fi
-
-%postun java
-if [ -x %{_bindir}/rebuild-gcj-db ]; then
-  %{_bindir}/rebuild-gcj-db
-fi
-
-%files -f %{name}5.lang
-%defattr(-,root,root,-)
-%doc COPYING ChangeLog readme-csound5.txt
-%{_bindir}/cs-launcher
-%{_bindir}/csb64enc
-%{_bindir}/csound
-%{_bindir}/cvanal
-%{_bindir}/dnoise
-%{_bindir}/cs-envext
-%{_bindir}/cs-extract
-%{_bindir}/cs-extractor
-%{_bindir}/het_export
-%{_bindir}/het_import
-%{_bindir}/hetro
-%{_bindir}/lpanal
-%{_bindir}/lpc_export
-%{_bindir}/lpc_import
-%{_bindir}/makecsd
-%{_bindir}/cs-mixer
-%{_bindir}/pvanal
-%{_bindir}/pvlook
-%{_bindir}/cs-scale
-%{_bindir}/cs-scot
-%{_bindir}/scsort
-%{_bindir}/cs-sndinfo
-%{_bindir}/cs-srconv
-%{_bindir}/pv_export
-%{_bindir}/pv_import
-%{_libdir}/lib%{name}.so.5.2
-%{_libdir}/libcsnd.so.5.2
-%dir %{_libdir}/%{name}/plugins
-%{_libdir}/%{name}/plugins/libambicode1.so
-%{_libdir}/%{name}/plugins/libampmidid.so
-%{_libdir}/%{name}/plugins/libbabo.so
-%{_libdir}/%{name}/plugins/libbarmodel.so
-%{_libdir}/%{name}/plugins/libcompress.so
-%{_libdir}/%{name}/plugins/libcontrol.so
-%{_libdir}/%{name}/plugins/libchua.so
-%{_libdir}/%{name}/plugins/libcs_date.so
-%{_libdir}/%{name}/plugins/libcs_pan2.so
-%{_libdir}/%{name}/plugins/libcs_pvs_ops.so
-%{_libdir}/%{name}/plugins/libeqfil.so
-%{_libdir}/%{name}/plugins/libftest.so
-%{_libdir}/%{name}/plugins/libgabnew.so
-%{_libdir}/%{name}/plugins/libgrain4.so
-%{_libdir}/%{name}/plugins/libhrtferX.so
-%{_libdir}/%{name}/plugins/libhrtfnew.so
-%{_libdir}/%{name}/plugins/libimage.so
-%{_libdir}/%{name}/plugins/libloscilx.so
-%{_libdir}/%{name}/plugins/libminmax.so
-%{_libdir}/%{name}/plugins/libmixer.so
-%{_libdir}/%{name}/plugins/libmodal4.so
-%{_libdir}/%{name}/plugins/libmutexops.so
-%{_libdir}/%{name}/plugins/liboggplay.so
-%{_libdir}/%{name}/plugins/libpartikkel.so
-%{_libdir}/%{name}/plugins/libphisem.so
-%{_libdir}/%{name}/plugins/libphysmod.so
-%{_libdir}/%{name}/plugins/libpitch.so
-%{_libdir}/%{name}/plugins/libptrack.so
-%{_libdir}/%{name}/plugins/libpvoc.so
-%{_libdir}/%{name}/plugins/libpvsbuffer.so
-%{_libdir}/%{name}/plugins/libpy.so
-%{_libdir}/%{name}/plugins/librtalsa.so
-%{_libdir}/%{name}/plugins/librtpulse.so
-%{_libdir}/%{name}/plugins/libscansyn.so
-%{_libdir}/%{name}/plugins/libscoreline.so
-%{_libdir}/%{name}/plugins/libsfont.so
-%{_libdir}/%{name}/plugins/libshape.so
-%{_libdir}/%{name}/plugins/libstackops.so
-%{_libdir}/%{name}/plugins/libstdopcod.so
-%{_libdir}/%{name}/plugins/libstdutil.so
-%{_libdir}/%{name}/plugins/libsystem_call.so
-%{_libdir}/%{name}/plugins/libudprecv.so
-%{_libdir}/%{name}/plugins/libudpsend.so
-%{_libdir}/%{name}/plugins/libvbap.so
-%{_libdir}/%{name}/plugins/libharmon.so
-%{_libdir}/%{name}/plugins/libugakbari.so
-%{_libdir}/%{name}/plugins/libvaops.so
-%{_libdir}/%{name}/plugins/libvosim.so
-
-%files devel
-%defattr(-,root,root,-)
-%{_includedir}/%{name}/
-%{_libdir}/lib%{name}.so
-
-%files python
-%defattr(-,root,root,-)
-%{_libdir}/libcsnd.so
-%{_libdir}/python%{pyver}/site-packages/*
-
-%files java
-%defattr(-,root,root,-)
-%{_libdir}/lib_jcsound.so
-%{_libdir}/%{name}/java/
-%{_javadir}/csnd.jar
-%attr(-,root,root) %{_libdir}/gcj/%{name}
-
-%files javadoc
-%defattr(-,root,root,-)
-%doc %{_javadocdir}/%{name}-java
-
-%files tk
-%defattr(-,root,root,-)
-%{_libdir}/%{name}/tcl/
-%{_bindir}/matrix.tk
-%{_bindir}/brkpt
-%{_bindir}/linseg
-%{_bindir}/tabdes
-%{_bindir}/cstclsh
-%{_bindir}/cswish
-
-%files gui
-%defattr(-,root,root,-)
-%{_bindir}/csound5gui
-
-%files fltk
-%defattr(-,root,root,-)
-%{_libdir}/%{name}/plugins/libwidgets.so
-
-%files jack
-%defattr(-,root,root,-)
-%{_libdir}/%{name}/plugins/librtjack.so
-%{_libdir}/%{name}/plugins/libjackTransport.so
-
-%files fluidsynth
-%defattr(-,root,root,-)
-%{_libdir}/%{name}/plugins/libfluidOpcodes.so
-
-%files dssi
-%defattr(-,root,root,-)
-%{_libdir}/%{name}/plugins/libdssi4cs.so
-
-%files osc
-%defattr(-,root,root,-)
-%{_libdir}/%{name}/plugins/libosc.so
-
-%files virtual-keyboard
-%defattr(-,root,root,-)
-%{_libdir}/%{name}/plugins/libvirtual.so
-
-%files manual
-%defattr(-,root,root,-)
-#%doc manual/copying.txt manual/credits.txt manual/readme.txt manual/news.txt
-#%doc manual/html/*
-#%doc manual/examples
-

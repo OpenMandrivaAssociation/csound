@@ -332,7 +332,6 @@ fi
 %{_libdir}/%{name}/plugins/libambicode1.so
 %{_libdir}/%{name}/plugins/libampmidid.so
 %{_libdir}/%{name}/plugins/libbabo.so
-%{_libdir}/%{name}/plugins/liblinear_algebra.so
 %{_libdir}/%{name}/plugins/libbarmodel.so
 %{_libdir}/%{name}/plugins/libcompress.so
 %{_libdir}/%{name}/plugins/libcontrol.so

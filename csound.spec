@@ -17,7 +17,7 @@
 Summary:       A sound synthesis language and library
 Name:          csound
 Version:       5.10.1
-Release:       %mkrel 1
+Release:       %mkrel 2
 URL:           http://csound.sourceforge.net/
 License:       LGPLv2+
 Group:         Sound
@@ -231,7 +231,7 @@ fi
 
 %package javadoc
 Summary: API documentation for Java Csound support
-Group: Documentation
+Group: Books/Other 
 
 %description javadoc
 API documentation for the %{name}-java package.
@@ -369,7 +369,7 @@ A virtual MIDI keyboard plugin for Csound
 
 %package manual
 Summary: Csound manual
-Group: Documentation
+Group: Books/Other 
 Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 

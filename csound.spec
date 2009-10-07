@@ -17,12 +17,31 @@
 Summary:       A sound synthesis language and library
 Name:          csound
 Version:       5.10.1
-Release:       %mkrel 2
-URL:           http://csound.sourceforge.net/
+Release:       %mkrel 3
 License:       LGPLv2+
 Group:         Sound
+URL:           http://csound.sourceforge.net/
 
-BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root
+Source0: http://downloads.sourceforge.net/csound/Csound5.10.1.tar.gz
+Source1: http://downloads.sourceforge.net/csound/Csound5.10_manual_src.tar.gz
+Source2: http://downloads.sourceforge.net/csound/Csound5.10_manual_html.zip
+
+Patch1: csound-5.10.1-no-usr-local.patch
+Patch2: csound-5.10.1-default-opcodedir.patch
+Patch3: csound-5.10.1-rtalsa-fix.patch
+Patch4: csound-5.10.1-makebuild.patch
+Patch5: csound-5.10.1-64-bit-plugin-path.patch
+Patch6: csound-5.10.1-fix-conflicts.patch
+Patch7: csound-5.10.1-fix-locale-install.patch
+Patch8: csound-5.10.1-enable-oggplay.patch
+
+Patch9: csound-2817271-soname.patch
+Patch0: csound-fixpython.patch
+Patch10: csound-default-pulse.patch
+
+Patch11: Csound5.10-fix-tcl-check.patch
+Patch12: Csound5.10-fix-includes.patch
+
 BuildRequires: swig scons 
 BuildRequires: libsndfile-devel 
 BuildRequires: png-devel 
@@ -53,25 +72,7 @@ BuildRequires: boost-devel
 Obsoletes: csound-tutorial <= 5.08
 Obsoletes: olpcsound <= 5.10.90
 
-Source0: http://downloads.sourceforge.net/csound/Csound5.10.1.tar.gz
-Source1: http://downloads.sourceforge.net/csound/Csound5.10_manual_src.tar.gz
-Source2: http://downloads.sourceforge.net/csound/Csound5.10_manual_html.zip
-
-Patch1: csound-5.10.1-no-usr-local.patch
-Patch2: csound-5.10.1-default-opcodedir.patch
-Patch3: csound-5.10.1-rtalsa-fix.patch
-Patch4: csound-5.10.1-makebuild.patch
-Patch5: csound-5.10.1-64-bit-plugin-path.patch
-Patch6: csound-5.10.1-fix-conflicts.patch
-Patch7: csound-5.10.1-fix-locale-install.patch
-Patch8: csound-5.10.1-enable-oggplay.patch
-
-Patch9: csound-2817271-soname.patch
-Patch0: csound-fixpython.patch
-Patch10: csound-default-pulse.patch
-
-Patch11: Csound5.10-fix-tcl-check.patch
-Patch12: Csound5.10-fix-includes.patch
+BuildRoot:     %{_tmppath}/%{name}-%{version}
 
 %description
 Csound is a sound and music synthesis system, providing facilities for
@@ -367,16 +368,16 @@ A virtual MIDI keyboard plugin for Csound
 
 #--------------------------------------------------------------------
 
-%package manual
+%package doc
 Summary: Csound manual
 Group: Books/Other 
+Obsoletes: %{name}-manual
 Requires: %{name} = %{version}-%{release}
-BuildArch: noarch
 
-%description manual
+%description doc
 Canonical Reference Manual for Csound.
 
-%files manual
+%files doc
 %defattr(-,root,root,-)
 #%doc manual/copying.txt manual/credits.txt manual/readme.txt manual/news.txt
 #%doc manual/html/*

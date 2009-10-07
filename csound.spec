@@ -181,7 +181,7 @@ Contains headers and libraries for developing applications that use Csound.
 
 %package python
 Summary: Python Csound development files and libraries
-Group: Development/Libraries
+Group: Development/Python
 Requires: %{name} = %{version}-%{release}
 Requires: python
 
@@ -198,7 +198,7 @@ use Csound.
 
 %package java
 Summary: Java Csound support
-Group: System Environment/Libraries
+Group: Development/Java
 Requires: %{name} = %{version}-%{release}
 Requires:         jpackage-utils >= 1.5
 Requires:         java-1.5.0-gcj
@@ -232,7 +232,7 @@ fi
 
 %package javadoc
 Summary: API documentation for Java Csound support
-Group: Books/Other 
+Group: Development/Java
 
 %description javadoc
 API documentation for the %{name}-java package.
@@ -245,7 +245,7 @@ API documentation for the %{name}-java package.
 
 %package tk
 Summary: Tcl/Tk related Csound utilities
-Group: Applications/Multimedia
+Group: Sound
 Requires: %{name} = %{version}-%{release}
 Requires: tcl tk
 
@@ -266,7 +266,7 @@ Contains Tcl/Tk related Csound utilities
 
 %package gui
 Summary: A FLTK-based GUI for Csound
-Group: Applications/Multimedia
+Group: Sound
 Requires: %{name} = %{version}-%{release}
 Requires: fltk xdg-utils
 
@@ -281,7 +281,7 @@ Contains a FLTK-based GUI for Csound
 
 %package fltk
 Summary: FLTK plugins for Csound
-Group: Applications/Multimedia
+Group: Sound
 Requires: %{name} = %{version}-%{release}
 Requires: fltk
 
@@ -296,7 +296,7 @@ Contains FLTK plugins for csound
 
 %package jack
 Summary: Jack Audio plugins for Csound
-Group: Applications/Multimedia
+Group: Sound
 Requires: %{name} = %{version}-%{release}
 Requires: jack-audio-connection-kit
 
@@ -312,7 +312,7 @@ Contains Jack Audio plugins for Csound
 
 %package fluidsynth
 Summary: Fluidsyth soundfont plugin for Csound
-Group: Applications/Multimedia
+Group: Sound
 Requires: %{name} = %{version}-%{release}
 
 %description fluidsynth
@@ -326,7 +326,7 @@ Contains Fluidsynth soundfont plugin for Csound.
 
 %package dssi
 Summary: Disposable Soft Synth Interface (DSSI) plugin for Csound
-Group: Applications/Multimedia
+Group: Sound
 Requires: %{name} = %{version}-%{release}
 Requires: dssi
 
@@ -341,7 +341,7 @@ Disposable Soft Synth Interface (DSSI) plugin for Csound
 
 %package osc
 Summary: Open Sound Control (OSC) plugin for Csound
-Group: Applications/Multimedia
+Group: Sound
 Requires: %{name} = %{version}-%{release}
 
 %description osc
@@ -355,7 +355,7 @@ Open Sound Control (OSC) plugin for Csound
 
 %package virtual-keyboard
 Summary: Virtual MIDI keyboard plugin for Csound
-Group: Applications/Multimedia
+Group: Sound
 Requires: %{name} = %{version}-%{release}
 Requires: fltk
 
@@ -370,7 +370,7 @@ A virtual MIDI keyboard plugin for Csound
 
 %package doc
 Summary: Csound manual
-Group: Books/Other 
+Group: Sound
 Obsoletes: %{name}-manual
 Requires: %{name} = %{version}-%{release}
 

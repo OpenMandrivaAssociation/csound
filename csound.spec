@@ -165,7 +165,7 @@ at least classical, pop, techno, ambient...
 
 %package devel
 Summary: Csound development files and libraries
-Group: Development/Libraries
+Group: Development/C
 Requires: %{name} = %{version}-%{release}
 Obsoletes: olpcsound-devel <= 5.10.90
 

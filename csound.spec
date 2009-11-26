@@ -17,7 +17,7 @@
 Summary:       A sound synthesis language and library
 Name:          csound
 Version:       5.11
-Release:       %mkrel 1
+Release:       %mkrel 2
 License:       LGPLv2+
 Group:         Sound
 URL:           http://csound.sourceforge.net/
@@ -298,7 +298,7 @@ Contains FLTK plugins for csound
 Summary: Jack Audio plugins for Csound
 Group: Sound
 Requires: %{name} = %{version}-%{release}
-Requires: jack-audio-connection-kit
+Requires: jackit
 
 %description jack
 Contains Jack Audio plugins for Csound

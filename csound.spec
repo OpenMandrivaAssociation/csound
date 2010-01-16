@@ -17,7 +17,7 @@
 Summary:       A sound synthesis language and library
 Name:          csound
 Version:       5.11
-Release:       %mkrel 4
+Release:       %mkrel 5
 License:       LGPLv2+
 Group:         Sound
 URL:           http://csound.sourceforge.net/

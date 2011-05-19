@@ -49,6 +49,7 @@ Patch10: csound-5.13.0-compile-flag.patch
 Patch11: csound-5.13.0-fixpythonint.patch
 Patch12: csound-5.13.0-fltk.patch
 Patch13: Csound5.13-fix-tcl-check.patch
+Patch14: csound-5.13.0-fix-link.patch
 
 %description
 Csound is a sound and music synthesis system, providing facilities for
@@ -196,6 +197,7 @@ Canonical Reference Manual for Csound.
 %patch11 -p1 -b .fixpythonint
 %patch12 -p0 -b .fltk
 %patch13 -p0 -b .tcl
+%patch14 -p0 -b .link
 
 tar xf %{SOURCE1}
 (cd manual; unzip -q %{SOURCE2})
@@ -234,6 +236,7 @@ scons dynamicCsoundLibrary=1 \
       prefix=%{_prefix} \
       customCCFLAGS="%{optflags}" \
       customCXXFLAGS="%{optflags}" \
+      customSHLINKFLAGS="%{ldflags}" \
       Word64=%{build64bit} \
       useDouble=%{useDouble}
 

@@ -25,6 +25,7 @@ BuildRequires: fluidsynth-devel liblo-devel dssi-devel lua-devel
 BuildRequires: fltk-devel
 BuildRequires: java-devel >= 1.4.0
 BuildRequires: jpackage-utils >= 1.5
+BuildRequires: java-1.5.0-gcj-devel
 BuildRequires: tk-devel tcl-devel
 BuildRequires: tetex tetex-latex xsltproc
 BuildRequires: libvorbis-devel libogg-devel

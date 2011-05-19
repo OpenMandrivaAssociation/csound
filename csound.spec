@@ -12,7 +12,7 @@
 Summary:       A sound synthesis language and library
 Name:          csound
 Version:       5.13.0
-Release:       2
+Release:       1
 URL:           http://csound.sourceforge.net/
 License:       LGPLv2+
 Group:         Sound
@@ -58,7 +58,7 @@ at least classical, pop, techno, ambient...
 
 %package devel
 Summary: Csound development files and libraries
-Group: Development/Libraries
+Group: Development/C
 Requires: %{name} = %{version}-%{release}
 
 %description devel
@@ -66,7 +66,7 @@ Contains headers and libraries for developing applications that use Csound.
 
 %package python
 Summary: Python Csound development files and libraries
-Group: Development/Libraries
+Group: Development/Python
 Requires: %{name} = %{version}-%{release}
 Requires: python
 
@@ -76,24 +76,19 @@ use Csound.
 
 %package python-devel
 Summary: Csound python development files and libraries
-Group: Development/Libraries
-Requires: %{name} = %{version}-%{release}
+Group: Development/Python
+Requires: %{name}-python = %{version}-%{release}
 
 %description python-devel
 Contains libraries for developing against csound-python.
 
 %package java
 Summary: Java Csound support
-Group: System Environment/Libraries
+Group: Development/Java
 Requires: %{name} = %{version}-%{release}
 Requires:         jpackage-utils >= 1.5
 Requires:         java-1.5.0-gcj
-Requires(post):   jpackage-utils >= 1.5
-Requires(postun): jpackage-utils >= 1.5
-Requires(post):   java-gcj-compat
-Requires(postun): java-gcj-compat
-Requires(post):   /sbin/ldconfig
-Requires(postun): /sbin/ldconfig
+Requires(post,postun): gcj-tools
 
 %description java
 Contains Java language bindings for developing and running Java
@@ -101,14 +96,14 @@ applications that use Csound.
 
 %package javadoc
 Summary: API documentation for Java Csound support
-Group: Documentation
+Group: Development/Java
 
 %description javadoc
 API documentation for the %{name}-java package.
 
 %package tk
 Summary: Tcl/Tk related Csound utilities
-Group: Applications/Multimedia
+Group: Sound
 Requires: %{name} = %{version}-%{release}
 Requires: tcl tk
 
@@ -117,7 +112,7 @@ Contains Tcl/Tk related Csound utilities
 
 %package gui
 Summary: A FLTK-based GUI for Csound
-Group: Applications/Multimedia
+Group: Sound
 Requires: %{name} = %{version}-%{release}
 Requires: fltk xdg-utils
 
@@ -126,7 +121,7 @@ Contains a FLTK-based GUI for Csound
 
 %package fltk
 Summary: FLTK plugins for Csound
-Group: Applications/Multimedia
+Group: Sound
 Requires: %{name} = %{version}-%{release}
 Requires: fltk
 
@@ -135,16 +130,15 @@ Contains FLTK plugins for csound
 
 %package jack
 Summary: Jack Audio plugins for Csound
-Group: Applications/Multimedia
+Group: Sound
 Requires: %{name} = %{version}-%{release}
-Requires: jack-audio-connection-kit
 
 %description jack
 Contains Jack Audio plugins for Csound
 
 %package fluidsynth
 Summary: Fluidsyth soundfont plugin for Csound
-Group: Applications/Multimedia
+Group: Sound
 Requires: %{name} = %{version}-%{release}
 
 %description fluidsynth
@@ -152,7 +146,7 @@ Contains Fluidsynth soundfont plugin for Csound.
 
 %package dssi
 Summary: Disposable Soft Synth Interface (DSSI) plugin for Csound
-Group: Applications/Multimedia
+Group: Sound
 Requires: %{name} = %{version}-%{release}
 Requires: dssi
 
@@ -161,7 +155,7 @@ Disposable Soft Synth Interface (DSSI) plugin for Csound
 
 %package osc
 Summary: Open Sound Control (OSC) plugin for Csound
-Group: Applications/Multimedia
+Group: Sound
 Requires: %{name} = %{version}-%{release}
 
 %description osc
@@ -169,7 +163,7 @@ Open Sound Control (OSC) plugin for Csound
 
 %package virtual-keyboard
 Summary: Virtual MIDI keyboard plugin for Csound
-Group: Applications/Multimedia
+Group: Sound
 Requires: %{name} = %{version}-%{release}
 Requires: fltk
 

@@ -175,7 +175,7 @@ A virtual MIDI keyboard plugin for Csound
 
 %package manual
 Summary: Csound manual
-Group: Documentation
+Group: Sound
 Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 

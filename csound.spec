@@ -1,57 +1,69 @@
 # Csound is really dumb about 64-bit
-%ifarch x86_64 ia64 ppc64 sparc64 s390x
-%define build64bit 1
-%define install64bit --word64
-%define useDouble 1
+%ifarch	x86_64 ia64 ppc64 sparc64 s390x
+%define	build64bit 1
+%define	install64bit --word64
+%define	useDouble 1
 %else
-%define build64bit 0
-%define install64bit %{nil}
-%define useDouble 0
+%define	build64bit 0
+%define	install64bit %{nil}
+%define	useDouble 0
 %endif
 
-Summary:       A sound synthesis language and library
-Name:          csound
-Version:       5.17.11
-Release:       1
-URL:           http://csound.sourceforge.net/
-License:       LGPLv2+
-Group:         Sound
+Summary:	A sound synthesis language and library
+Name:		csound
+Version:	5.18.02
+Release:	2
+License:	LGPLv2+
+Group:		Sound
 
-BuildRequires: swig scons libsndfile-devel libpng-devel libjpeg-devel
-BuildRequires: python python-devel
-BuildRequires: flex bison
-BuildRequires: alsa-lib-devel jackit-devel pulseaudio-devel
-BuildRequires: fluidsynth-devel liblo-devel dssi-devel lua-devel
-BuildRequires: fltk-devel
-BuildRequires: java-devel >= 1.4.0
-BuildRequires: jpackage-utils >= 1.5
-BuildRequires: java-1.6.0-openjdk-devel
-BuildRequires: java-1.5.0-gcj-devel
-BuildRequires: tk-devel tcl-devel
-BuildRequires: tetex tetex-latex xsltproc
-BuildRequires: libvorbis-devel libogg-devel
-BuildRequires: gettext
-BuildRequires: gcc-c++ boost-devel
+URL:		http://csound.sourceforge.net/
+Source0:	http://downloads.sourceforge.net/csound/Csound%{version}.tar.gz
+Source2:	http://downloads.sourceforge.net/csound/Csound5.18_manual_html.zip
+Patch0:		csound-5.18.02-fixpython.patch
+Patch1:		csound-5.18.02-no-usr-local.patch
+Patch2:		csound-5.18.02-default-opcodedir.patch
+Patch5:		csound-5.18.02-64-bit-plugin-path.patch
+Patch6:		csound-5.18.02-fix-conflicts.patch
+Patch7:		csound-5.18.02-fix-locale-install.patch
+Patch9:		csound-5.18.02-default-pulse.patch
+Patch10:	csound-5.18.02-compile-flag.patch
+Patch13:	csound-5.18.02-fix-tcl-check.patch
+Patch14:	csound-5.18.02-fix-link.patch
 
-Source0: http://downloads.sourceforge.net/csound/Csound%{version}.tar.gz
-Source1: http://downloads.sourceforge.net/csound/Csound5.17-manual-src.tar.gz
-Source2: http://downloads.sourceforge.net/csound/Csound5.17_manual_html.zip
+BuildRequires:	bison
+BuildRequires:	flex
+BuildRequires:	gcc-c++
+BuildRequires:	gettext
+BuildRequires:	python
+BuildRequires:	scons
+BuildRequires:	swig
+BuildRequires:	jpackage-utils >= 1.5
+BuildRequires:	texlive
+BuildRequires:	texlive-latex
+BuildRequires:	xsltproc
 
-Patch0: csound-5.12.1-fixpython.patch
-Patch1: csound-5.13.0-no-usr-local.patch
-Patch2: csound-5.13.0-default-opcodedir.patch
-Patch3: csound-5.10.1-rtalsa-fix.patch
-Patch4: csound-5.13.0-tclversion.patch
-Patch5: csound-5.10.1-64-bit-plugin-path.patch
-Patch6: csound-5.13.0-fix-conflicts.patch
-Patch7: csound-5.13.0-fix-locale-install.patch
-Patch8: csound-5.10.1-enable-oggplay.patch
-Patch9: csound-5.13.0-default-pulse.patch
-Patch10: csound-5.13.0-compile-flag.patch
-Patch11: csound-5.13.0-fixpythonint.patch
-Patch12: csound-5.13.0-fltk.patch
-Patch13: Csound5.13-fix-tcl-check.patch
-Patch14: csound-5.13.0-fix-link.patch
+BuildRequires:	alsa-oss-devel
+BuildRequires:	boost-devel
+BuildRequires:	fltk-devel
+BuildRequires:	java-1.6.0-openjdk-devel
+BuildRequires:	java-1.5.0-gcj-devel
+BuildRequires:	jpeg-devel
+BuildRequires:	tcl-devel
+BuildRequires:	pkgconfig(cairo)
+BuildRequires:	pkgconfig(dssi)
+BuildRequires:	pkgconfig(fluidsynth)
+BuildRequires:	pkgconfig(jack)
+BuildRequires:	pkgconfig(liblo)
+BuildRequires:	pkgconfig(libpng)
+BuildRequires:	pkgconfig(libpulse)
+BuildRequires:	pkgconfig(lua)
+BuildRequires:	pkgconfig(luajit)
+BuildRequires:	pkgconfig(ogg)
+BuildRequires:	pkgconfig(pixman-1)
+BuildRequires:	pkgconfig(python)
+BuildRequires:	pkgconfig(sndfile)
+BuildRequires:	pkgconfig(tk)
+BuildRequires:	pkgconfig(vorbis)
 
 %description
 Csound is a sound and music synthesis system, providing facilities for
@@ -60,124 +72,135 @@ restricted to any style of music, having been used for many years in
 at least classical, pop, techno, ambient...
 
 %package devel
-Summary: Csound development files and libraries
-Group: Development/C
-Requires: %{name} = %{version}-%{release}
+Summary:	Csound development files and libraries
+Group:		Development/C
+Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Contains headers and libraries for developing applications that use Csound.
 
 %package python
-Summary: Python Csound development files and libraries
-Group: Development/Python
-Requires: %{name} = %{version}-%{release}
-Requires: python
+Summary:	Python Csound development files and libraries
+Group:		Development/Python
+Requires:	%{name} = %{version}-%{release}
+Requires:	python
 
 %description python
 Contains Python language bindings for developing Python applications that
 use Csound.
 
-%package python-devel
-Summary: Csound python development files and libraries
-Group: Development/Python
-Requires: %{name}-python = %{version}-%{release}
 
-%description python-devel
-Contains libraries for developing against csound-python.
+#package python-devel
+#Summary:		Csound python development files and libraries
+#Group:		Development/Python
+#Requires:	%{name}-python = %{version}-%{release}
+#description python-devel
+#Contains libraries for developing against csound-python.
 
 %package java
-Summary: Java Csound support
-Group: Development/Java
-Requires: %{name} = %{version}-%{release}
-Requires:         jpackage-utils >= 1.5
-Requires:         java-1.5.0-gcj
-Requires(post,postun): gcj-tools
+Summary:	Java Csound support
+Group:		Development/Java
+Requires:	%{name} = %{version}-%{release}
+Requires:	jpackage-utils >= 1.5
+Requires:	java-1.5.0-gcj
+Requires(post,postun):	gcj-tools
 
 %description java
 Contains Java language bindings for developing and running Java
 applications that use Csound.
 
+
 %package javadoc
-Summary: API documentation for Java Csound support
-Group: Development/Java
+Summary:	API documentation for Java Csound support
+Group:		Development/Java
 
 %description javadoc
 API documentation for the %{name}-java package.
 
 %package tk
-Summary: Tcl/Tk related Csound utilities
-Group: Sound
-Requires: %{name} = %{version}-%{release}
-Requires: tcl tk
+Summary:	Tcl/Tk related Csound utilities
+Group:		Sound
+Requires:	%{name} = %{version}-%{release}
+Requires:	tcl
+Requires:	tk
 
 %description tk
-Contains Tcl/Tk related Csound utilities
+Contains Tcl/Tk related Csound utilities.
+
 
 %package gui
-Summary: A FLTK-based GUI for Csound
-Group: Sound
-Requires: %{name} = %{version}-%{release}
-Requires: fltk xdg-utils
+Summary:	A FLTK-based GUI for Csound
+Group:		Sound
+Requires:	%{name} = %{version}-%{release}
+Requires:	fltk
+Requires:	xdg-utils
 
 %description gui
-Contains a FLTK-based GUI for Csound
+Contains a FLTK-based GUI for Csound.
+
 
 %package fltk
-Summary: FLTK plugins for Csound
-Group: Sound
-Requires: %{name} = %{version}-%{release}
-Requires: fltk
+Summary:	FLTK plugins for Csound
+Group:		Sound
+Requires:	%{name} = %{version}-%{release}
+Requires:	fltk
 
 %description fltk
-Contains FLTK plugins for csound
+Contains FLTK plugins for csound.
+
 
 %package jack
-Summary: Jack Audio plugins for Csound
-Group: Sound
-Requires: %{name} = %{version}-%{release}
+Summary:	Jack Audio plugins for Csound
+Group:		Sound
+Requires:	%{name} = %{version}-%{release}
 
 %description jack
-Contains Jack Audio plugins for Csound
+Contains Jack Audio plugins for Csound.
+
 
 %package fluidsynth
-Summary: Fluidsyth soundfont plugin for Csound
-Group: Sound
-Requires: %{name} = %{version}-%{release}
+Summary:	Fluidsyth soundfont plugin for Csound
+Group:		Sound
+Requires:	%{name} = %{version}-%{release}
 
 %description fluidsynth
 Contains Fluidsynth soundfont plugin for Csound.
 
+
 %package dssi
-Summary: Disposable Soft Synth Interface (DSSI) plugin for Csound
-Group: Sound
-Requires: %{name} = %{version}-%{release}
-Requires: dssi
+Summary:	Disposable Soft Synth Interface (DSSI) plugin for Csound
+Group:		Sound
+Requires:	%{name} = %{version}-%{release}
+Requires:	dssi
 
 %description dssi
-Disposable Soft Synth Interface (DSSI) plugin for Csound
+Disposable Soft Synth Interface (DSSI) plugin for Csound.
+
 
 %package osc
-Summary: Open Sound Control (OSC) plugin for Csound
-Group: Sound
-Requires: %{name} = %{version}-%{release}
+Summary:	Open Sound Control (OSC) plugin for Csound
+Group:		Sound
+Requires:	%{name} = %{version}-%{release}
 
 %description osc
-Open Sound Control (OSC) plugin for Csound
+Open Sound Control (OSC) plugin for Csound.
+
 
 %package virtual-keyboard
-Summary: Virtual MIDI keyboard plugin for Csound
-Group: Sound
-Requires: %{name} = %{version}-%{release}
-Requires: fltk
+Summary:	Virtual MIDI keyboard plugin for Csound
+Group:		Sound
+Requires:	%{name} = %{version}-%{release}
+Requires:	fltk
 
 %description virtual-keyboard
-A virtual MIDI keyboard plugin for Csound
+A virtual MIDI keyboard plugin for Csound.
+
 
 %package manual
-Summary: Csound manual
-Group: Sound
-Requires: %{name} = %{version}-%{release}
-BuildArch: noarch
+Summary:	Csound manual
+Group:		Sound
+Requires:	%{name} = %{version}-%{release}
+BuildArch:	noarch
 
 %description manual
 Canonical Reference Manual for Csound.
@@ -188,29 +211,38 @@ Canonical Reference Manual for Csound.
 %patch0 -p1 -b .fixpython
 %patch1 -p1 -b .no-usr-local
 %patch2 -p1 -b .default-opcodedir
-%patch3 -p1 -b .rtalsa
-%patch4 -p1 -b .makebuild
 %patch5 -p1 -b .64-bit-plugin-path
 %patch6 -p1 -b .fix-conflicts
 %patch7 -p1 -b .fix-local-install
-%patch8 -p1 -b .enable-oggplay
 %patch9 -p1 -b .default-pulse
 %patch10 -p1 -b .compile-flag
-%patch11 -p1 -b .fixpythonint
-%patch12 -p0 -b .fltk
-%patch13 -p0 -b .tcl
-%patch14 -p0 -b .link
+%patch13 -p1 -b .tcl
+%patch14 -p1 -b .link
 
-tar xf %{SOURCE1}
+# It needs a custom.py or scons will fail
+cp custom-linux-jpff.py custom.py
+
+#tar xf %{SOURCE1}
+mkdir -p manual
 (cd manual; unzip -q %{SOURCE2})
 
 %build
-%define Werror_cflags %nil
+%define Werror_cflags %{nil}
+
+# TODO: (gvm) Try the cmake-based build
+
 # Adjust location of the documentation for the GUI bits
 sed -ie 's#\"firefox /usr/local/share/doc/csound/manual/#\"xdg-open file://%{_docdir}/%{name}-manual-%{version}/#' \
       frontends/fltk_gui/CsoundGlobalSettings.cpp
 
-scons dynamicCsoundLibrary=1 \
+# Dirty hacks
+sed -i s/"(LIBS = \['sndfile'\]"/"(LIBS = \['sndfile', 'python2.7'\]"/g SConstruct
+sed -i s/"java-1.5.0"/"java-1.6.0"/g SConstruct
+sed -i s/"java-1.5.0"/"java-1.6.0"/g custom.py
+
+# -I %{py_platlibdir} -I %{_includedir} -I %{py_incdir}
+scons \
+      dynamicCsoundLibrary=1 \
       buildRelease=0 \
       noDebug=0 \
       disableGStabs=1 \
@@ -219,7 +251,6 @@ scons dynamicCsoundLibrary=1 \
       useALSA=1 \
       usePortAudio=0 \
       usePortMIDI=0 \
-      useOGG=1 \
       useOSC=1 \
       useJack=1 \
       useFLTK=1 \
@@ -245,6 +276,7 @@ scons dynamicCsoundLibrary=1 \
 # Generate javadoc
 (cd interfaces; javadoc *.java)
 
+
 %install
 %{__rm} -rf %{buildroot}
 %{__python} install.py --prefix=%{_prefix} --instdir=%{buildroot} %{install64bit}
@@ -266,13 +298,6 @@ install -dm 644 %{buildroot}%{_javadocdir}/%{name}-java
 
 %find_lang %{name}5
 
-%clean
-%{__rm} -rf %{buildroot}
-
-%post -p /sbin/ldconfig
-
-%postun -p /sbin/ldconfig
-
 %post java
 if [ -x %{_bindir}/rebuild-gcj-db ]; then
   %{_bindir}/rebuild-gcj-db
@@ -284,7 +309,6 @@ if [ -x %{_bindir}/rebuild-gcj-db ]; then
 fi
 
 %files -f %{name}5.lang
-%defattr(-,root,root,-)
 %doc COPYING ChangeLog readme-csound5.txt
 %{_bindir}/atsa
 %{_bindir}/cs-launcher
@@ -314,93 +338,61 @@ fi
 %{_bindir}/pv_import
 %{_libdir}/lib%{name}.so.5.2
 %dir %{_libdir}/%{name}/plugins
-%{_libdir}/%{name}/plugins/libambicode1.so
 %{_libdir}/%{name}/plugins/libampmidid.so
-%{_libdir}/%{name}/plugins/libbabo.so
-%{_libdir}/%{name}/plugins/libbarmodel.so
-%{_libdir}/%{name}/plugins/libcompress.so
-%{_libdir}/%{name}/plugins/libcontrol.so
+%{_libdir}/%{name}/plugins/libcellular.so
 %{_libdir}/%{name}/plugins/libchua.so
-%{_libdir}/%{name}/plugins/libcrossfm.so
+%{_libdir}/%{name}/plugins/libcontrol.so
 %{_libdir}/%{name}/plugins/libcs_date.so
-%{_libdir}/%{name}/plugins/libcs_pan2.so
-%{_libdir}/%{name}/plugins/libcs_pvs_ops.so
+%{_libdir}/%{name}/plugins/libcsladspa.so
 %{_libdir}/%{name}/plugins/libdoppler.so
-%{_libdir}/%{name}/plugins/libeqfil.so
-%{_libdir}/%{name}/plugins/libftest.so
-%{_libdir}/%{name}/plugins/libgabnew.so
-%{_libdir}/%{name}/plugins/libgrain4.so
-%{_libdir}/%{name}/plugins/libharmon.so
-%{_libdir}/%{name}/plugins/libhrtferX.so
-%{_libdir}/%{name}/plugins/libhrtfnew.so
+%{_libdir}/%{name}/plugins/libfareygen.so
+%{_libdir}/%{name}/plugins/libfractalnoise.so
 %{_libdir}/%{name}/plugins/libimage.so
 %{_libdir}/%{name}/plugins/libjacko.so
-%{_libdir}/%{name}/plugins/libloscilx.so
-%{_libdir}/%{name}/plugins/libminmax.so
+%{_libdir}/%{name}/plugins/libjoystik.so
 %{_libdir}/%{name}/plugins/libmixer.so
-%{_libdir}/%{name}/plugins/libmodal4.so
-%{_libdir}/%{name}/plugins/libmodmatrix.so
-%{_libdir}/%{name}/plugins/libmutexops.so
-%{_libdir}/%{name}/plugins/liboggplay.so
-%{_libdir}/%{name}/plugins/libpartikkel.so
-%{_libdir}/%{name}/plugins/libphisem.so
-%{_libdir}/%{name}/plugins/libphysmod.so
-%{_libdir}/%{name}/plugins/libpitch.so
-%{_libdir}/%{name}/plugins/libptrack.so
-%{_libdir}/%{name}/plugins/libpvlock.so
-%{_libdir}/%{name}/plugins/libpvoc.so
-%{_libdir}/%{name}/plugins/libpvsbuffer.so
+%{_libdir}/%{name}/plugins/libplaterev.so
 %{_libdir}/%{name}/plugins/libpy.so
 %{_libdir}/%{name}/plugins/librtalsa.so
 %{_libdir}/%{name}/plugins/librtpulse.so
 %{_libdir}/%{name}/plugins/libscansyn.so
-%{_libdir}/%{name}/plugins/libscoreline.so
-%{_libdir}/%{name}/plugins/libsfont.so
-%{_libdir}/%{name}/plugins/libshape.so
+%{_libdir}/%{name}/plugins/libserial.so
 %{_libdir}/%{name}/plugins/libsignalflowgraph.so
-%{_libdir}/%{name}/plugins/libstackops.so
-%{_libdir}/%{name}/plugins/libstdopcod.so
 %{_libdir}/%{name}/plugins/libstdutil.so
 %{_libdir}/%{name}/plugins/libsystem_call.so
-%{_libdir}/%{name}/plugins/libtabsum.so
 %{_libdir}/%{name}/plugins/libudprecv.so
 %{_libdir}/%{name}/plugins/libudpsend.so
-%{_libdir}/%{name}/plugins/libugakbari.so
 %{_libdir}/%{name}/plugins/liburandom.so
-%{_libdir}/%{name}/plugins/libvaops.so
-%{_libdir}/%{name}/plugins/libvbap.so
-%{_libdir}/%{name}/plugins/libvosim.so
 
 %files devel
-%defattr(-,root,root,-)
 %{_includedir}/%{name}/
 %{_libdir}/lib%{name}.so
 %{_libdir}/libcsnd.so
 
+
 %files python
-%defattr(-,root,root,-)
 %{_libdir}/libcsnd.so.5.2
 %{python_sitearch}/_csnd*
 %{python_sitearch}/csnd*
 
-%files python-devel
-%defattr(-,root,root,-)
-# %{_libdir}/libcsnd.so
+
+#files python-devel
+#{_libdir}/libcsnd.so
+
 
 %files java
-%defattr(-,root,root,-)
 %{_libdir}/lib_jcsound.so
 %{_libdir}/%{name}/java/
 %{_javadir}/csnd.jar
 %attr(-,root,root) %{_libdir}/gcj/%{name}
 
+
 %files javadoc
-%defattr(-,root,root,-)
 %doc COPYING
 %doc %{_javadocdir}/%{name}-java
 
+
 %files tk
-%defattr(-,root,root,-)
 %{_libdir}/%{name}/tcl/
 %{_bindir}/matrix.tk
 %{_bindir}/brkpt
@@ -410,36 +402,99 @@ fi
 %{_bindir}/cswish
 
 %files gui
-%defattr(-,root,root,-)
 %{_bindir}/csound5gui
 
+
 %files fltk
-%defattr(-,root,root,-)
 %{_libdir}/%{name}/plugins/libwidgets.so
 
 %files jack
-%defattr(-,root,root,-)
 %{_libdir}/%{name}/plugins/librtjack.so
 %{_libdir}/%{name}/plugins/libjackTransport.so
 
+
 %files fluidsynth
-%defattr(-,root,root,-)
 %{_libdir}/%{name}/plugins/libfluidOpcodes.so
 
+
 %files dssi
-%defattr(-,root,root,-)
 %{_libdir}/%{name}/plugins/libdssi4cs.so
 
+
 %files osc
-%defattr(-,root,root,-)
 %{_libdir}/%{name}/plugins/libosc.so
 
+
 %files virtual-keyboard
-%defattr(-,root,root,-)
 %{_libdir}/%{name}/plugins/libvirtual.so
 
+
 %files manual
-%defattr(-,root,root,-)
-%doc manual/copying.txt manual/credits.txt manual/readme.txt manual/news.txt
-%doc manual/html/*
-%doc manual/examples/*
+%doc manual/html
+
+
+%changelog
+* Wed Oct 31 2012 Giovanni Mariani <mc2374@mclink.it> 5.18.02-1
+- New release 5.18.02
+- Dropped BuildRoot, %%defattr and %%clean section
+- Switched BReqs from tetex to texlive and fixed others (libalsa and sndfile)
+- Dropped empty package csound-python-devel
+- Dropped S1: it does not exist on the download site
+- Remade P0 (partially upstreamed) and P13 (scons was partially removed
+  in favor of cmake)
+- Dropped P3-P4, P11-P12 (fixed upstream) and P8 (OGG support dropped)
+- Rediffed P1-P2, P5-P7, P9-P10
+
+* Tue May 24 2011 Funda Wang <fwang@mandriva.org> 5.13.0-1
++ Revision: 678012
+- update group
+- fix build
+- add br
+- more linkage fix
+- more linkage fix
+- fix linkage
+- update group
+- sync with fedora
+
+  + Stéphane Téletchéa <steletch@mandriva.org>
+    - update to new version 5.12.1
+
+* Sun Nov 07 2010 Jani Välimaa <wally@mandriva.org> 5.11-6mdv2011.0
++ Revision: 594452
+- recognize python 2.7
+- rebuild for python 2.7
+
+* Sat Jan 16 2010 Funda Wang <fwang@mandriva.org> 5.11-5mdv2010.1
++ Revision: 492228
+- rebuild for new libjpegv8
+
+* Fri Jan 08 2010 Frederik Himpe <fhimpe@mandriva.org> 5.11-4mdv2010.1
++ Revision: 487725
+- rebuild
+
+* Sun Jan 03 2010 Emmanuel Andry <eandry@mandriva.org> 5.11-3mdv2010.1
++ Revision: 486025
+- rebuild for new fltk
+
+* Thu Nov 26 2009 Jérôme Brenier <incubusss@mandriva.org> 5.11-2mdv2010.1
++ Revision: 470418
+-jack subpackage : requires jackit instead of jack-audio-connection-kit
+
+* Sat Nov 07 2009 Frederik Himpe <fhimpe@mandriva.org> 5.11-1mdv2010.1
++ Revision: 462689
+- update to new version 5.11
+
+* Thu Oct 08 2009 Guillaume Rousse <guillomovitch@mandriva.org> 5.10.1-3mdv2010.0
++ Revision: 456003
+- fix groups
+- rename -manual subpackage to -doc
+- don't make it noarch, it doesn't work
+
+* Sun Sep 20 2009 Nicolas Lécureuil <nlecureuil@mandriva.com> 5.10.1-2mdv2010.0
++ Revision: 446059
+- Fix groups
+- Fix obsoletes
+- Let my "monk" packaging habits fix my spec files :)
+- Fix file list
+- import csound
+

@@ -1,6 +1,7 @@
---- Csound5.13.0/SConstruct.orig	2011-04-07 07:12:40.477602580 +0100
-+++ Csound5.13.0/SConstruct	2011-04-07 07:15:29.884656314 +0100
-@@ -503,9 +503,9 @@
+diff -rupN Csound5.18.02.old/SConstruct Csound5.18.02/SConstruct
+--- Csound5.18.02.old/SConstruct	2012-08-31 15:40:34.000000000 +0200
++++ Csound5.18.02/SConstruct	2012-10-31 13:34:26.696378274 +0100
+@@ -470,9 +470,9 @@ if commonEnvironment['Lib64'] == '1':
      if getPlatform() == 'sunos':
          commonEnvironment.Prepend(LIBPATH = ['.', '#.', '/lib/64', '/usr/lib/64'])
      else:
@@ -12,7 +13,7 @@
  
  if commonEnvironment['Word64'] == '1':
      if compilerSun():
-@@ -531,7 +531,7 @@
+@@ -499,7 +499,7 @@ if getPlatform() == 'linux':
      commonEnvironment.Append(LINKFLAGS = ['-Wl,-Bdynamic'])
  elif getPlatform() == 'sunos':
      commonEnvironment.Append(CCFLAGS = "-D_SOLARIS")
@@ -21,7 +22,7 @@
      commonEnvironment.Append(CPPPATH = '/usr/include')
      commonEnvironment.Append(CPPPATH = '/usr/jdk/instances/jdk1.5.0/include')
      if compilerGNU():
-@@ -539,7 +539,7 @@
+@@ -507,7 +507,7 @@ elif getPlatform() == 'sunos':
          commonEnvironment.Append(LINKFLAGS = ['-Wl,-Bdynamic'])
  elif getPlatform() == 'darwin':
      commonEnvironment.Append(CCFLAGS = "-DMACOSX")
@@ -30,16 +31,16 @@
      commonEnvironment.Append(CCFLAGS = "-DPIPES")
      if commonEnvironment['useAltivec'] == '1':
          print 'CONFIGURATION DECISION: Using Altivec optimisation'
-@@ -556,7 +556,7 @@
+@@ -524,7 +524,7 @@ elif getPlatform() == 'win32':
      commonEnvironment.Append(CXXFLAGS = '-DFL_DLL')
      if compilerGNU():
-         commonEnvironment.Prepend(CCFLAGS = "-Wall")
+         commonEnvironment.Prepend(CCFLAGS = ["-Wall"])
 -        commonEnvironment.Append(CPPPATH = '/usr/local/include')
 +        commonEnvironment.Append(CPPPATH = '/usr/include')
          commonEnvironment.Append(CPPPATH = '/usr/include')
-         commonEnvironment.Append(SHLINKFLAGS = Split(' -mno-cygwin -Wl,--enable-auto-import -Wl,--enable-runtime-pseudo-reloc'))
-         commonEnvironment.Append(LINKFLAGS = Split(' -mno-cygwin -Wl,--enable-auto-import -Wl,--enable-runtime-pseudo-reloc'))
-@@ -602,13 +602,13 @@
+         commonEnvironment.Append(SHLINKFLAGS = Split('-Wl,--enable-auto-import -Wl,--enable-runtime-pseudo-reloc'))
+         commonEnvironment.Append(LINKFLAGS = Split('-Wl,--enable-auto-import -Wl,--enable-runtime-pseudo-reloc'))
+@@ -571,13 +571,13 @@ if getPlatform() == 'linux':
      pythonLibs = ['python%s' % commonEnvironment['pythonVersion']]
  elif getPlatform() == 'sunos':
      path1 = '/usr/include/python%s' % commonEnvironment['pythonVersion']
@@ -56,7 +57,7 @@
      pythonLibs = ['python%s' % commonEnvironment['pythonVersion']]
      tclIncludePath = []
  elif getPlatform() == 'darwin':
-@@ -1340,10 +1340,10 @@
+@@ -1289,10 +1289,10 @@ if getPlatform() == 'win32':
      PYDLL = r'%s\%s' % (os.environ['SystemRoot'], pythonLibs[0])
  if getPlatform() == 'win32' and pythonLibs[0] < 'python24' and compilerGNU():
      pythonImportLibrary = csoundInterfacesEnvironment.Command(

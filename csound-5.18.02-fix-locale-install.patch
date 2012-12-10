@@ -1,6 +1,7 @@
---- Csound5.13.0/install.py.orig	2011-04-07 08:02:28.460324321 +0100
-+++ Csound5.13.0/install.py	2011-04-07 08:04:25.227162356 +0100
-@@ -154,7 +154,7 @@
+diff -rupN Csound5.18.02.old/install.py Csound5.18.02/install.py
+--- Csound5.18.02.old/install.py	2012-10-31 14:03:30.000000000 +0100
++++ Csound5.18.02/install.py	2012-10-31 14:06:36.642710126 +0100
+@@ -154,7 +154,7 @@ def installFile_(src, dst, perm, stripMo
      fileList += [fileName]
      fullName = concatPath([instDir, fileName])
      err = runCmd(['install', '-p', '-m', perm, src, fullName])

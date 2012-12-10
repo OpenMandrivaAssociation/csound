@@ -1,6 +1,7 @@
---- SConstruct.link	2011-05-19 08:02:45.000000000 +0200
-+++ SConstruct	2011-05-19 08:14:03.000000000 +0200
-@@ -1328,7 +1328,7 @@
+diff -rupN Csound5.18.02.old/SConstruct Csound5.18.02/SConstruct
+--- Csound5.18.02.old/SConstruct	2012-11-01 18:45:00.000000000 +0100
++++ Csound5.18.02/SConstruct	2012-11-02 15:26:22.372126656 +0100
+@@ -1271,7 +1271,7 @@ if getPlatform() == 'darwin':
  #############################################################################
  
  csoundProgramEnvironment = commonEnvironment.Clone()
@@ -9,15 +10,15 @@
  csoundProgramEnvironment.Append(LIBS = libCsoundLibs)
  
  
-@@ -1491,6 +1491,7 @@
+@@ -1439,6 +1439,7 @@ else:
      else:
          print 'CONFIGURATION DECISION: Building Java wrapper to Csound C++ interface library.'
          javaWrapperEnvironment = csoundWrapperEnvironment.Clone()
-+	javaWrapperEnvironment.Append(LINKFLAGS = Split(commonEnvironment['customSHLINKFLAGS']))
- 	javaWrapperEnvironment.Prepend(LIBS = ['csnd'])
-         if getPlatform() == 'darwin':
-             javaWrapperEnvironment.Append(CPPPATH =
-@@ -1880,7 +1881,7 @@
++        javaWrapperEnvironment.Append(LINKFLAGS = Split(commonEnvironment['customSHLINKFLAGS']))
+         if  getPlatform() == 'darwin': 
+              javaWrapperEnvironment.Append(LINKFLAGS = ['-L.', '-l_csnd'])
+ 	else: javaWrapperEnvironment.Prepend(LIBS = ['csnd'])
+@@ -1867,7 +1868,7 @@ else:
  if pulseaudioFound and (getPlatform() == 'linux' or getPlatform() == 'sunos'):
     print "CONFIGURATION DECISION: Building PulseAudio plugin"
     pulseaudioEnv = pluginEnvironment.Clone()
@@ -26,19 +27,17 @@
     makePlugin(pulseaudioEnv, 'rtpulse', ['InOut/rtpulse.c'])
  
  if getPlatform() == 'win32':
-@@ -1970,7 +1971,7 @@
- else:
-     print "CONFIGURATION DECISION: Building OGG plugins."
-     oggEnvironment = pluginEnvironment.Clone()
--    oggEnvironment.Append(LINKFLAGS = ['-lvorbisfile', '-lvorbis', '-logg'])
-+    oggEnvironment.Append(LIBS = ['-lvorbisfile', '-lvorbis', '-logg'])
-     makePlugin(oggEnvironment, 'oggplay', ['Opcodes/oggplay.c'])
- # end ogg opcodes
+@@ -2215,22 +2216,22 @@ if (commonEnvironment['buildUtilities']
  
-@@ -2252,18 +2253,18 @@
-   executables.append(a)
-   Depends(a, csoundLibrary)
-   if compilerGNU():
+ executables.append(csoundProgramEnvironment.Program('scsort',
+     ['util1/sortex/smain.c']))
+- a = csoundProgramEnvironment.Program('cs-extract', ['util1/sortex/xmain.c'])
+- executables.append(a)
+- Depends(a, csoundLibrary)
++a = csoundProgramEnvironment.Program('cs-extract', ['util1/sortex/xmain.c'])
++executables.append(a)
++Depends(a, csoundLibrary)
+ if compilerGNU():
 -    a = commonEnvironment.Program('cs-launcher', ['util1/csd_util/cs.c'])
 +    a = csoundProgramEnvironment.Program('cs-launcher', ['util1/csd_util/cs.c'])
      executables.append(a)
@@ -54,12 +53,12 @@
        ['util1/scot/scot_main.c', 'util1/scot/scot.c']))
  #executables.append(csoundProgramEnvironment.Program('cscore',
  #    ['util1/cscore/cscore_main.c']))
--  executables.append(commonEnvironment.Program('sdif2ad',
-+  executables.append(csoundProgramEnvironment.Program('sdif2ad',
+-executables.append(commonEnvironment.Program('sdif2ad',
++executables.append(csoundProgramEnvironment.Program('sdif2ad',
      ['SDIF/sdif2adsyn.c', 'SDIF/sdif.c', 'SDIF/sdif-mem.c']))
  
  for i in executables:
-@@ -2680,6 +2681,7 @@
+@@ -2630,6 +2631,7 @@ if commonEnvironment['buildTclcsound'] =
          lib1 = 'tcl%s' % commonEnvironment['tclversion']
          lib2 = 'tk%s' % commonEnvironment['tclversion']
          csTclEnvironment.Append(LIBS = [lib1, lib2, 'dl', 'pthread'])

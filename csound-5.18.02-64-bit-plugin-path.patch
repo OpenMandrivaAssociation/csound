@@ -1,6 +1,7 @@
---- Csound5.10.1/SConstruct.orig	2008-12-18 18:26:46.000000000 +0000
-+++ Csound5.10.1/SConstruct	2009-03-30 20:08:10.000000000 +0100
-@@ -768,9 +768,7 @@
+diff -rupN Csound5.18.02.old/SConstruct Csound5.18.02/SConstruct
+--- Csound5.18.02.old/SConstruct	2012-10-31 13:34:26.000000000 +0100
++++ Csound5.18.02/SConstruct	2012-10-31 13:54:24.847504491 +0100
+@@ -835,9 +835,7 @@ if not configure.CheckSndFile():
  # library version is CS_VERSION.CS_APIVERSION
  csoundLibraryVersion = '5.2'
  csoundLibraryName = 'csound'
@@ -10,8 +11,8 @@
 +if getPlatform() == 'win32':
      csoundLibraryName += '32'
  # flags for linking with the Csound library
- libCsoundLinkFlags = []
-@@ -814,8 +812,6 @@
+ libCsoundLinkFlags = commonEnvironment['LINKFLAGS'] 
+@@ -893,8 +891,6 @@ if commonEnvironment['buildRelease'] !=
              tmp = '%s/lib/csound/plugins' % commonEnvironment['prefix']
          else:
              tmp = '%s/lib64/csound/plugins' % commonEnvironment['prefix']
@@ -20,7 +21,7 @@
          s = '-DCS_DEFAULT_PLUGINDIR=\\"%s\\"' % tmp
          csoundLibraryEnvironment.Append(CPPFLAGS = [s])
      elif buildOSXFramework != 0:
-@@ -2588,10 +2584,7 @@
+@@ -2841,10 +2837,7 @@ for i in sys.path:
      if i[:sys.prefix.__len__()] == sys.prefix and i[-13:] == 'site-packages':
          PYTHON_DIR = i
  
@@ -32,9 +33,18 @@
  
  if commonEnvironment['install'] == '1':
      installExecutables = Alias('install-executables',
---- Csound5.10.1/Top/csmodule.c.orig	2008-12-18 17:37:02.000000000 +0000
-+++ Csound5.10.1/Top/csmodule.c	2009-03-30 20:08:10.000000000 +0100
-@@ -638,17 +638,12 @@
+diff -rupN Csound5.18.02.old/Top/csmodule.c Csound5.18.02/Top/csmodule.c
+--- Csound5.18.02.old/Top/csmodule.c	2012-10-31 13:42:39.000000000 +0100
++++ Csound5.18.02/Top/csmodule.c	2012-10-31 13:56:46.211902408 +0100
+@@ -131,7 +131,6 @@ static  const   char    *InfoFunc_Name =
+ 
+ /* environment variable storing path to plugin libraries */
+ static  const   char    *plugindir_envvar =   "OPCODEDIR";
+-static  const   char    *plugindir64_envvar = "OPCODEDIR64";
+ 
+ /* default directory to load plugins from if environment variable is not set */
+ #if !(defined(_CSOUND_RELEASE_) && (defined(LINUX) || defined(__MACH__)))
+@@ -685,17 +684,12 @@ int csoundLoadModules(CSOUND *csound)
        return CSOUND_ERROR;
  
      /* open plugin directory */
@@ -54,13 +64,3 @@
      }
      dir = opendir(dname);
      if (UNLIKELY(dir == (DIR*) NULL)) {
---- Csound5.13.0/Top/csmodule.c.orig	2011-04-07 10:48:47.631735127 +0100
-+++ Csound5.13.0/Top/csmodule.c	2011-04-07 10:49:19.170735598 +0100
-@@ -127,7 +127,6 @@
- 
- /* environment variable storing path to plugin libraries */
- static  const   char    *plugindir_envvar =   "OPCODEDIR";
--static  const   char    *plugindir64_envvar = "OPCODEDIR64";
- 
- /* default directory to load plugins from if environment variable is not set */
- #if !(defined(_CSOUND_RELEASE_) && (defined(LINUX) || defined(__MACH__)))

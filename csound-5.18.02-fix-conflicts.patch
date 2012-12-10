@@ -1,6 +1,27 @@
---- Csound5.13.0/SConstruct.orig	2011-04-07 07:56:09.439110711 +0100
-+++ Csound5.13.0/SConstruct	2011-04-07 07:56:27.059538112 +0100
-@@ -2218,38 +2218,43 @@
+diff -rupN Csound5.18.02.old/install.py Csound5.18.02/install.py
+--- Csound5.18.02.old/install.py	2012-10-31 13:27:51.000000000 +0100
++++ Csound5.18.02/install.py	2012-10-31 14:03:30.132773529 +0100
+@@ -20,12 +20,12 @@ headerFiles = ['H/cfgvar.h', 'H/cscore.h
+ 
+ exeFiles1 = ['csound', 'csound5gui', 'CsoundVST', 'winsound',
+              'cstclsh', 'cswish', 'cseditor',
+-             'cvanal', 'dnoise', 'envext', 'extractor',
++             'cvanal', 'dnoise', 'cs-envext', 'cs-extractor',
+              'het_export', 'het_import', 'hetro', 'lpanal',
+-             'lpc_export', 'lpc_import', 'mixer', 'pvanal',
++             'lpc_export', 'lpc_import', 'cs-mixer', 'pvanal',
+              'pv_export', 'pv_import', 'atsa',
+-             'pvlook', 'scale', 'sndinfo', 'srconv', 'csbeats',
+-             'scsort', 'extract', 'cs', 'csb64enc', 'makecsd', 'scot']
++             'pvlook', 'cs-scale', 'cs-sndinfo', 'cs-srconv', 'beats',
++             'scsort', 'cs-extract', 'cs-launcher', 'csb64enc', 'makecsd', 'cs-scot']
+ 
+ exeFiles2 = ['brkpt', 'linseg', 'tabdes']
+ 
+diff -rupN Csound5.18.02.old/SConstruct Csound5.18.02/SConstruct
+--- Csound5.18.02.old/SConstruct	2012-10-31 13:54:24.000000000 +0100
++++ Csound5.18.02/SConstruct	2012-10-31 14:02:25.575869411 +0100
+@@ -2191,37 +2191,42 @@ if (commonEnvironment['buildUtilities']
          ['atsa',        'util/atsa_main.c'    ],
          ['cvanal',      'util/cvl_main.c'     ],
          ['dnoise',      'util/dnoise_main.c'  ],
@@ -33,15 +54,14 @@
 +       if i[0].startswith("cs-"):
 +           Depends(a, csoundLibrary)
  
- if not buildOLPC:
-   executables.append(csoundProgramEnvironment.Program('scsort',
+ executables.append(csoundProgramEnvironment.Program('scsort',
      ['util1/sortex/smain.c']))
--  executables.append(csoundProgramEnvironment.Program('extract',
+-executables.append(csoundProgramEnvironment.Program('extract',
 -    ['util1/sortex/xmain.c']))
-+  a = csoundProgramEnvironment.Program('cs-extract', ['util1/sortex/xmain.c'])
-+  executables.append(a)
-+  Depends(a, csoundLibrary)
-   if compilerGNU():
++ a = csoundProgramEnvironment.Program('cs-extract', ['util1/sortex/xmain.c'])
++ executables.append(a)
++ Depends(a, csoundLibrary)
+ if compilerGNU():
 -    executables.append(commonEnvironment.Program('cs',
 -      ['util1/csd_util/cs.c']))
 +    a = commonEnvironment.Program('cs-launcher', ['util1/csd_util/cs.c'])
@@ -56,22 +76,3 @@
        ['util1/scot/scot_main.c', 'util1/scot/scot.c']))
  #executables.append(csoundProgramEnvironment.Program('cscore',
  #    ['util1/cscore/cscore_main.c']))
---- Csound5.13.0/install.py.orig	2011-04-07 07:56:43.608939511 +0100
-+++ Csound5.13.0/install.py	2011-04-07 07:58:42.764835288 +0100
-@@ -20,12 +20,12 @@
- 
- exeFiles1 = ['csound', 'csound5gui', 'CsoundVST', 'winsound',
-              'cstclsh', 'cswish', 'cseditor',
--             'cvanal', 'dnoise', 'envext', 'extractor',
-+             'cvanal', 'dnoise', 'cs-envext', 'cs-extractor',
-              'het_export', 'het_import', 'hetro', 'lpanal',
--             'lpc_export', 'lpc_import', 'mixer', 'pvanal',
-+             'lpc_export', 'lpc_import', 'cs-mixer', 'pvanal',
-              'pv_export', 'pv_import', 'atsa',
--             'pvlook', 'scale', 'sndinfo', 'srconv', 'beats',
--             'scsort', 'extract', 'cs', 'csb64enc', 'makecsd', 'scot']
-+             'pvlook', 'cs-scale', 'cs-sndinfo', 'cs-srconv', 'beats',
-+             'scsort', 'cs-extract', 'cs-launcher', 'csb64enc', 'makecsd', 'cs-scot']
- 
- exeFiles2 = ['brkpt', 'linseg', 'tabdes']
- 

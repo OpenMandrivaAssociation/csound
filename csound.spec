@@ -12,7 +12,7 @@
 Summary:	A sound synthesis language and library
 Name:		csound
 Version:	5.18.02
-Release:	2
+Release:	3
 License:	LGPLv2+
 Group:		Sound
 

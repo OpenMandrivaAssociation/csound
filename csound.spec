@@ -19,6 +19,7 @@ Group:		Sound
 URL:		http://csound.sourceforge.net/
 Source0:	http://downloads.sourceforge.net/csound/Csound%{version}.tar.gz
 Source2:	http://downloads.sourceforge.net/csound/Csound5.18_manual_html.zip
+Source100:	csound.rpmlintrc
 Patch0:		csound-5.18.02-fixpython.patch
 Patch1:		csound-5.18.02-no-usr-local.patch
 Patch2:		csound-5.18.02-default-opcodedir.patch

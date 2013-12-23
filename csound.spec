@@ -12,7 +12,7 @@
 Summary:	A sound synthesis language and library
 Name:		csound
 Version:	5.18.02
-Release:	3
+Release:	4
 License:	LGPLv2+
 Group:		Sound
 
@@ -432,70 +432,4 @@ fi
 
 %files manual
 %doc manual/html
-
-
-%changelog
-* Wed Oct 31 2012 Giovanni Mariani <mc2374@mclink.it> 5.18.02-1
-- New release 5.18.02
-- Dropped BuildRoot, %%defattr and %%clean section
-- Switched BReqs from tetex to texlive and fixed others (libalsa and sndfile)
-- Dropped empty package csound-python-devel
-- Dropped S1: it does not exist on the download site
-- Remade P0 (partially upstreamed) and P13 (scons was partially removed
-  in favor of cmake)
-- Dropped P3-P4, P11-P12 (fixed upstream) and P8 (OGG support dropped)
-- Rediffed P1-P2, P5-P7, P9-P10
-
-* Tue May 24 2011 Funda Wang <fwang@mandriva.org> 5.13.0-1
-+ Revision: 678012
-- update group
-- fix build
-- add br
-- more linkage fix
-- more linkage fix
-- fix linkage
-- update group
-- sync with fedora
-
-  + Stéphane Téletchéa <steletch@mandriva.org>
-    - update to new version 5.12.1
-
-* Sun Nov 07 2010 Jani Välimaa <wally@mandriva.org> 5.11-6mdv2011.0
-+ Revision: 594452
-- recognize python 2.7
-- rebuild for python 2.7
-
-* Sat Jan 16 2010 Funda Wang <fwang@mandriva.org> 5.11-5mdv2010.1
-+ Revision: 492228
-- rebuild for new libjpegv8
-
-* Fri Jan 08 2010 Frederik Himpe <fhimpe@mandriva.org> 5.11-4mdv2010.1
-+ Revision: 487725
-- rebuild
-
-* Sun Jan 03 2010 Emmanuel Andry <eandry@mandriva.org> 5.11-3mdv2010.1
-+ Revision: 486025
-- rebuild for new fltk
-
-* Thu Nov 26 2009 Jérôme Brenier <incubusss@mandriva.org> 5.11-2mdv2010.1
-+ Revision: 470418
--jack subpackage : requires jackit instead of jack-audio-connection-kit
-
-* Sat Nov 07 2009 Frederik Himpe <fhimpe@mandriva.org> 5.11-1mdv2010.1
-+ Revision: 462689
-- update to new version 5.11
-
-* Thu Oct 08 2009 Guillaume Rousse <guillomovitch@mandriva.org> 5.10.1-3mdv2010.0
-+ Revision: 456003
-- fix groups
-- rename -manual subpackage to -doc
-- don't make it noarch, it doesn't work
-
-* Sun Sep 20 2009 Nicolas Lécureuil <nlecureuil@mandriva.com> 5.10.1-2mdv2010.0
-+ Revision: 446059
-- Fix groups
-- Fix obsoletes
-- Let my "monk" packaging habits fix my spec files :)
-- Fix file list
-- import csound
 

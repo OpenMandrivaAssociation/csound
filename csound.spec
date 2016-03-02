@@ -66,6 +66,7 @@ BuildRequires:	fltk-devel
 BuildRequires:	java-devel
 BuildRequires:	jpackage-utils
 %endif
+BuildRequires:	ladspa-devel
 BuildRequires:	libxslt-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	libogg-devel

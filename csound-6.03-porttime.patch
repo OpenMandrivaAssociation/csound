@@ -1,0 +1,15 @@
+--- Csound6.06/InOut/CMakeLists.txt.porttime	2015-10-05 17:51:00.661826957 +0300
++++ Csound6.06/InOut/CMakeLists.txt	2015-10-05 17:51:54.476335412 +0300
+@@ -43,12 +43,6 @@
+ if(USE_PORTMIDI)
+     find_path(PORTMIDI_INCLUDE_PATH portmidi.h)
+     find_library(PORTMIDI_LIBRARY portmidi)
+-    if(WIN32)
+-    else()
+-        if(NEED_PORTTIME)
+-            find_library(PORTTIME_LIBRARY porttime)
+-        endif()
+-    endif()
+ endif()
+ if(USE_JACK)
+     find_library(JACK_LIBRARY jack)

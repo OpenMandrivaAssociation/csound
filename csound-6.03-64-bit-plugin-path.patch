@@ -1,0 +1,40 @@
+--- Csound6.06/CMakeLists.txt.64-bit-plugin-path	2015-10-05 17:45:56.981603881 +0300
++++ Csound6.06/CMakeLists.txt	2015-10-05 17:47:20.294841499 +0300
+@@ -35,11 +35,7 @@
+ endif()
+ message(STATUS "LIBRARY INSTALL DIR: ${LIBRARY_INSTALL_DIR}")
+ 
+-if(USE_DOUBLE)
+-    set(PLUGIN_INSTALL_DIR "${LIBRARY_INSTALL_DIR}/csound/plugins64-${APIVERSION}")
+-else()
+-    set(PLUGIN_INSTALL_DIR "${LIBRARY_INSTALL_DIR}/csound/plugins-${APIVERSION}")
+-endif()
++set(PLUGIN_INSTALL_DIR "${LIBRARY_INSTALL_DIR}/csound/plugins-${APIVERSION}")
+ 
+ 
+ execute_process (
+--- Csound6.06/Top/csmodule.c.64-bit-plugin-path	2015-09-29 14:13:27.961627653 +0300
++++ Csound6.06/Top/csmodule.c	2015-10-05 17:45:56.982603872 +0300
+@@ -142,9 +142,9 @@
+ #  define ENABLE_OPCODEDIR_WARNINGS 0
+ #  ifndef CS_DEFAULT_PLUGINDIR
+ #    ifndef USE_DOUBLE
+-#      define CS_DEFAULT_PLUGINDIR  "/usr/local/lib/csound/plugins"
++#      define CS_DEFAULT_PLUGINDIR  "/usr/lib/csound/plugins"
+ #    else
+-#      define CS_DEFAULT_PLUGINDIR  "/usr/local/lib/csound/plugins64"
++#      define CS_DEFAULT_PLUGINDIR  "/usr/lib64/csound/plugins"
+ #    endif
+ #  endif
+ #endif
+--- Csound6.06/installer/misc/mkpackage.py.64-bit-plugin-path	2015-09-29 14:13:28.132628129 +0300
++++ Csound6.06/installer/misc/mkpackage.py	2015-10-05 17:45:56.982603872 +0300
+@@ -27,7 +27,7 @@
+ # single precision plugin libraries
+ pluginDir32 = libDir + '/csound/plugins'
+ # double precision plugin libraries
+-pluginDir64 = libDir + '/csound/plugins64'
++pluginDir64 = libDir + '/csound/plugins'
+ # documentation
+ docDir      = instPrefix + '/share/doc/csound'
+ # tclcsound.so

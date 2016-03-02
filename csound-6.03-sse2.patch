@@ -1,0 +1,31 @@
+--- Csound6.06/cmake/CompilerOptimizations.cmake.sse2	2015-10-09 19:43:12.808044049 +0300
++++ Csound6.06/cmake/CompilerOptimizations.cmake	2015-10-09 19:45:13.087227716 +0300
+@@ -19,28 +19,6 @@
+ endif()
+ 
+ 
+-if(NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+-
+-check_c_compiler_flag(-mfpmath=sse HAS_FPMATH_SSE)
+-check_cxx_compiler_flag(-mfpmath=sse HAS_CXX_FPMATH_SSE)
+-  if (HAS_FPMATH_SSE)
+-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mfpmath=sse")
+-endif()
+-if (HAS_CXX_FPMATH_SSE)
+-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mfpmath=sse")
+-endif()
+-
+-endif()
+-
+-
+-check_c_compiler_flag(-msse2 HAS_SSE2)
+-check_cxx_compiler_flag(-msse2 HAS_CXX_SSE2)
+-  if (HAS_SSE2)
+-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -msse2")
+-endif()
+-if (HAS_CXX_SSE2)
+-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -msse2")
+-endif()
+ 
+ 
+ check_c_compiler_flag(-fomit-frame-pointer HAS_OMIT_FRAME_POINTER)

@@ -152,7 +152,7 @@ applications that use Csound.
 
 %package	fltk
 Summary:	FLTK plugins for Csound
-Group:		Sound/Utilities
+Group:		Sound
 Requires:	%{name} = %{version}-%{release}
 Requires:	fltk
 
@@ -161,7 +161,7 @@ Contains FLTK plugins for csound
 
 %package	jack
 Summary:	Jack Audio plugins for Csound
-Group:		Sound/Utilities
+Group:		Sound
 Requires:	%{name} = %{version}-%{release}
 Requires:	jackit
 
@@ -170,7 +170,7 @@ Contains Jack Audio plugins for Csound
 
 %package	fluidsynth
 Summary:	Fluidsyth soundfont plugin for Csound
-Group:		Sound/Utilities
+Group:		Sound
 Requires:	%{name} = %{version}-%{release}
 
 %description	fluidsynth
@@ -178,7 +178,7 @@ Contains Fluidsynth soundfont plugin for Csound.
 
 %package	dssi
 Summary:	Disposable Soft Synth Interface (DSSI) plugin for Csound
-Group:		Sound/Utilities
+Group:		Sound
 Requires:	%{name} = %{version}-%{release}
 Requires:	dssi
 
@@ -187,7 +187,7 @@ Disposable Soft Synth Interface (DSSI) plugin for Csound
 
 %package	osc
 Summary:	Open Sound Control (OSC) plugin for Csound
-Group:		Sound/Utilities
+Group:		Sound
 Requires:	%{name} = %{version}-%{release}
 
 %description	osc
@@ -202,7 +202,7 @@ PortAudio plugin for Csound
 
 %package	virtual-keyboard
 Summary:	Virtual MIDI keyboard plugin for Csound
-Group:		Sound/Utilities
+Group:		Sound
 Requires:	%{name} = %{version}-%{release}
 Requires:	fltk
 
@@ -211,7 +211,7 @@ A virtual MIDI keyboard plugin for Csound
 
 %package	doc
 Summary:	Csound manual
-Group:		Documentation
+Group:		Sound
 Obsoletes:	%{name}-manual
 Requires:	%{name} = %{version}-%{release}
 BuildArch:	noarch

@@ -239,6 +239,8 @@ sed -e 's,\(set(PYTHON_MODULE_INSTALL_DIR \).*,\1"%{python2_sitearch}"),' \
     -e 's,\(set(LUA_MODULE_INSTALL_DIR.*\)),\1/lua/%{luaver}),' \
     -i CMakeLists.txt
 
+sed -e 's/python/python2/' -i manual6/Makefile
+
 # PYTHON_MODULE_INSTALL_DIR was changed to execute_process.
 perl -p -0777 -i -e 's#execute_process\s*\(.*?OUTPUT_VARIABLE (PYTHON_MODULE_INSTALL_DIR)\s*?\)\s*\n#set($1 "%{python2_sitearch}")\n#ms' CMakeLists.txt
 
@@ -274,7 +276,7 @@ else
   %cmake -DUSE_LIB64:BOOL=OFF
 fi
 
-make %{?_smp_mflags} V=1
+make
 
 %if %{build_java}
 # Generate javadoc

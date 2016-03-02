@@ -51,7 +51,7 @@ BuildRequires:	swig
 BuildRequires:	pkgconfig(sndfile)
 BuildRequires:	png-devel
 BuildRequires:	jpeg-devel
-BuildRequires:	python2-devel
+BuildRequires:	python-devel
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:  pkgconfig(jack)
 BuildRequires:	pulseaudio-devel
@@ -66,6 +66,7 @@ BuildRequires:	fltk-devel
 BuildRequires:	java-devel
 BuildRequires:	jpackage-utils
 %endif
+BuildRequires:	ladspa-devel
 BuildRequires:	libxslt-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	libogg-devel
@@ -75,6 +76,8 @@ BuildRequires:	boost-devel
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	docbook-style-xsl
+BuildRequires:	docbook-dtd45-xml
+BuildRequires:	docbook-dtd42-xml
 BuildRequires:	xsltproc
 
 Obsoletes:	csound-tutorial <= 5.08
@@ -149,7 +152,7 @@ applications that use Csound.
 
 %package	fltk
 Summary:	FLTK plugins for Csound
-Group:		Sound/Utilities
+Group:		Sound
 Requires:	%{name} = %{version}-%{release}
 Requires:	fltk
 
@@ -158,7 +161,7 @@ Contains FLTK plugins for csound
 
 %package	jack
 Summary:	Jack Audio plugins for Csound
-Group:		Sound/Utilities
+Group:		Sound
 Requires:	%{name} = %{version}-%{release}
 Requires:	jackit
 
@@ -167,7 +170,7 @@ Contains Jack Audio plugins for Csound
 
 %package	fluidsynth
 Summary:	Fluidsyth soundfont plugin for Csound
-Group:		Sound/Utilities
+Group:		Sound
 Requires:	%{name} = %{version}-%{release}
 
 %description	fluidsynth
@@ -175,7 +178,7 @@ Contains Fluidsynth soundfont plugin for Csound.
 
 %package	dssi
 Summary:	Disposable Soft Synth Interface (DSSI) plugin for Csound
-Group:		Sound/Utilities
+Group:		Sound
 Requires:	%{name} = %{version}-%{release}
 Requires:	dssi
 
@@ -184,7 +187,7 @@ Disposable Soft Synth Interface (DSSI) plugin for Csound
 
 %package	osc
 Summary:	Open Sound Control (OSC) plugin for Csound
-Group:		Sound/Utilities
+Group:		Sound
 Requires:	%{name} = %{version}-%{release}
 
 %description	osc
@@ -199,7 +202,7 @@ PortAudio plugin for Csound
 
 %package	virtual-keyboard
 Summary:	Virtual MIDI keyboard plugin for Csound
-Group:		Sound/Utilities
+Group:		Sound
 Requires:	%{name} = %{version}-%{release}
 Requires:	fltk
 
@@ -208,7 +211,7 @@ A virtual MIDI keyboard plugin for Csound
 
 %package	doc
 Summary:	Csound manual
-Group:		Documentation
+Group:		Sound
 Obsoletes:	%{name}-manual
 Requires:	%{name} = %{version}-%{release}
 BuildArch:	noarch
@@ -231,13 +234,13 @@ Canonical Reference Manual for Csound.
 %patch5 -p0 -b .xdg-open
 
 # Fix python, lua, and java install paths
-sed -e 's,\(set(PYTHON_MODULE_INSTALL_DIR \).*,\1"%{python2_sitearch}"),' \
+sed -e 's,\(set(PYTHON_MODULE_INSTALL_DIR \).*,\1"%{python_sitearch}"),' \
     -e 's,\(set(JAVA_MODULE_INSTALL_DIR.*\)),\1/csound/java),' \
     -e 's,\(set(LUA_MODULE_INSTALL_DIR.*\)),\1/lua/%{luaver}),' \
     -i CMakeLists.txt
 
 # PYTHON_MODULE_INSTALL_DIR was changed to execute_process.
-perl -p -0777 -i -e 's#execute_process\s*\(.*?OUTPUT_VARIABLE (PYTHON_MODULE_INSTALL_DIR)\s*?\)\s*\n#set($1 "%{python2_sitearch}")\n#ms' CMakeLists.txt
+perl -p -0777 -i -e 's#execute_process\s*\(.*?OUTPUT_VARIABLE (PYTHON_MODULE_INSTALL_DIR)\s*?\)\s*\n#set($1 "%{python_sitearch}")\n#ms' CMakeLists.txt
 
 # Fix end of line encodings
 %define fix_line_encoding() \
@@ -378,7 +381,7 @@ popd
 %{_libdir}/libcsnd6.so
 
 %files python
-%{python2_sitearch}/*
+%{python_sitearch}/*
 
 %if %{build_java}
 %files java

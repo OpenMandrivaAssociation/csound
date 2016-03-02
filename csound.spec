@@ -51,7 +51,7 @@ BuildRequires:	swig
 BuildRequires:	pkgconfig(sndfile)
 BuildRequires:	png-devel
 BuildRequires:	jpeg-devel
-BuildRequires:	python2-devel
+BuildRequires:	python-devel
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:  pkgconfig(jack)
 BuildRequires:	pulseaudio-devel
@@ -231,13 +231,13 @@ Canonical Reference Manual for Csound.
 %patch5 -p0 -b .xdg-open
 
 # Fix python, lua, and java install paths
-sed -e 's,\(set(PYTHON_MODULE_INSTALL_DIR \).*,\1"%{python2_sitearch}"),' \
+sed -e 's,\(set(PYTHON_MODULE_INSTALL_DIR \).*,\1"%{python_sitearch}"),' \
     -e 's,\(set(JAVA_MODULE_INSTALL_DIR.*\)),\1/csound/java),' \
     -e 's,\(set(LUA_MODULE_INSTALL_DIR.*\)),\1/lua/%{luaver}),' \
     -i CMakeLists.txt
 
 # PYTHON_MODULE_INSTALL_DIR was changed to execute_process.
-perl -p -0777 -i -e 's#execute_process\s*\(.*?OUTPUT_VARIABLE (PYTHON_MODULE_INSTALL_DIR)\s*?\)\s*\n#set($1 "%{python2_sitearch}")\n#ms' CMakeLists.txt
+perl -p -0777 -i -e 's#execute_process\s*\(.*?OUTPUT_VARIABLE (PYTHON_MODULE_INSTALL_DIR)\s*?\)\s*\n#set($1 "%{python_sitearch}")\n#ms' CMakeLists.txt
 
 # Fix end of line encodings
 %define fix_line_encoding() \
@@ -378,7 +378,7 @@ popd
 %{_libdir}/libcsnd6.so
 
 %files python
-%{python2_sitearch}/*
+%{python_sitearch}/*
 
 %if %{build_java}
 %files java

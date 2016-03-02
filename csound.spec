@@ -75,6 +75,7 @@ BuildRequires:	boost-devel
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	docbook-style-xsl
+BuildRequires:	docbook-dtd45-xml
 BuildRequires:	xsltproc
 
 Obsoletes:	csound-tutorial <= 5.08

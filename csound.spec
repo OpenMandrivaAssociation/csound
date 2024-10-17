@@ -27,7 +27,7 @@ Version:	6.06
 Release:	3
 License:	LGPLv2+
 Group:		Sound
-URL:		http://csound.sourceforge.net/
+URL:		https://csound.sourceforge.net/
 
 Source0:	http://downloads.sourceforge.net/csound/Csound%{version}.tar.gz
 Source2:	http://downloads.sourceforge.net/csound/manual_src.tar.gz

@@ -1,0 +1,21 @@
+diff -rupN csound-20250719.old/Top/csound.c csound-20250719/Top/csound.c
+--- csound-20250719.old/Top/csound.c	2025-07-22 18:30:19.332471600 +0200
++++ csound-20250719/Top/csound.c	2025-07-22 20:41:43.602096992 +0200
+@@ -3582,7 +3582,7 @@ PUBLIC void csoundReset(CSOUND *csound)
+ #endif
+ #endif
+ #else
+-  strcpy(s, "alsa");
++  strcpy(s, "pulse");
+ #endif
+ 
+   csoundCreateConfigurationVariable(csound, "rtaudio", s, CSOUNDCFG_STRING, 0,
+@@ -3610,7 +3610,7 @@ PUBLIC void csoundReset(CSOUND *csound)
+     strcpy(s, "portmidi");
+ #endif
+ #else
+-    strcpy(s, "alsa");
++    strcpy(s, "pulse");
+ #endif
+   else
+     strcpy(s, "hostbased");

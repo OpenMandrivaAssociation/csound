@@ -1,5 +1,6 @@
---- installer/misc/vim/cshelp.orig	2014-05-04 05:49:43.318737126 -0600
-+++ installer/misc/vim/cshelp	2014-05-05 21:15:00.000000000 -0600
+diff -rupN csound-20250719.old/installer/misc/vim/cshelp csound-20250719/installer/misc/vim/cshelp
+--- csound-20250719.old/installer/misc/vim/cshelp	2025-07-22 18:30:19.374730300 +0200
++++ csound-20250719/installer/misc/vim/cshelp	2025-07-22 21:09:02.052976848 +0200
 @@ -3,7 +3,9 @@
  BROWSER_CMD=""
  
@@ -16,5 +17,5 @@
  fi
  
 -exec ${BROWSER_CMD} "/usr/local/share/doc/csound/manual/${OPNAME}.html"
-+exec ${BROWSER_CMD} "/usr/share/doc/csound-manual/${OPNAME}.html"
++exec ${BROWSER_CMD} "/usr/share/doc/csound/manual/${OPNAME}.html"
  

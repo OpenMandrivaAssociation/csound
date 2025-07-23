@@ -1,0 +1,34 @@
+diff -rupN csound-20250719.old/cmake/CompilerOptimizations.cmake csound-20250719/cmake/CompilerOptimizations.cmake
+--- csound-20250719.old/cmake/CompilerOptimizations.cmake	2025-07-22 18:30:19.334025400 +0200
++++ csound-20250719/cmake/CompilerOptimizations.cmake	2025-07-22 21:06:42.982551850 +0200
+@@ -19,30 +19,6 @@ if (HAS_CXX_FAST_MATH AND NOT MINGW)
+ endif()
+ 
+ 
+-
+-if(NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+-check_c_compiler_flag(-mfpmath=sse HAS_FPMATH_SSE)
+-check_cxx_compiler_flag(-mfpmath=sse HAS_CXX_FPMATH_SSE)
+-  if (HAS_FPMATH_SSE)
+-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mfpmath=sse")
+-endif()
+-if (HAS_CXX_FPMATH_SSE)
+-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mfpmath=sse")
+-endif()
+-
+-endif()
+-
+-
+-check_c_compiler_flag(-msse2 HAS_SSE2)
+-check_cxx_compiler_flag(-msse2 HAS_CXX_SSE2)
+-if (HAS_SSE2 AND NOT IOS AND NOT WASM AND NOT APPLE)
+-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -msse2")
+-endif()
+-if (HAS_CXX_SSE2 AND NOT IOS AND NOT WASM AND NOT APPLE)
+-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -msse2")
+-endif()
+-
+-
+ check_c_compiler_flag(-fomit-frame-pointer HAS_OMIT_FRAME_POINTER)
+ check_cxx_compiler_flag(-fomit-frame-pointer HAS_CXX_OMIT_FRAME_POINTER)
+ if (HAS_OMIT_FRAME_POINTER)

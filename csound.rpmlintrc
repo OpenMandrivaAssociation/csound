@@ -1,3 +1,5 @@
-#false positive
-addFilter('E: incoherent-version-in-name')
+# We cannot provide man pages if upstream does not have them
+addFilter("W: no-manual-page-for-binary")
 
+# The .csd are all example csound files, not text files
+addFilter("wrong-file-end-of-line-encoding")

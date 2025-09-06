@@ -5,10 +5,11 @@
 %define	libname		%mklibname %{name} %{major}
 %define	develname	%mklibname -d %{name}
 
-%define		gitdate	20250719
-%define		with_manual	1
+%define		gitdate	20250903
+
+%bcond_without	manual
 # As with 7.0.0beta1 java build is disabled in the sources
-%define		with_java	0
+%bcond_with	java
 
 # Avoid providing private libraries
 %global		__provides_exclude	_CsoundAC.so | _csnd7.so
@@ -17,14 +18,14 @@ Summary:		A sound synthesis language and library
 Name:		csound
 # Beta release
 Version:		7.0.0
-Release:		0.beta1
+Release:		0.beta7
 License:		LGPLv2+
 Group:		Sound
 Url:		https://csound.com
 # Sub-modules are a pain...
 #Source0:	https://github.com/csound/csound/archive/%%{name}-%%{version}.tar.gz
 Source0:	%{name}-%{gitdate}.tar.xz
-%if %{with_manual}
+%if %{with manual}
 Source1:	https://github.com/csound/csound/releases/download/%{version}/Csound6.18.0_manual_html.zip
 %endif
 Source100:	csound.rpmlintrc
@@ -41,13 +42,15 @@ BuildRequires:		flex
 BuildRequires:		git
 BuildRequires:		getfem
 BuildRequires:		gettext
+%if %{with java}
 BuildRequires:		java-21-openjdk-module-jdk.jpackage
+BuildRequires:		java-21-openjdk-devel
+%endif
 BuildRequires:		python
 BuildRequires:		swig >= 2.0
 BuildRequires:		xsltproc
 BuildRequires:		boost-devel
 BuildRequires:		gomp-devel
-BuildRequires:		java-21-openjdk-devel
 BuildRequires:		ladspa-devel
 BuildRequires:		libmusicxml-devel
 BuildRequires:		llvm-devel
@@ -205,7 +208,7 @@ Contains Python files for using Csound.
 
 #-------------------------------------------------------------------------------
 
-%if %{with_java}
+%if %{with java}
 %package java
 Summary:	Java Csound support
 Group:		Development/Java
@@ -351,7 +354,7 @@ find util1/sortex/ -name "*.c" -o -name "*.h" | xargs chmod 0644
 
 %make_build
 
-%if %{with_java}
+%if %{with java}
 # Generate javadoc...
 pushd interfaces
 	javadoc *.java
@@ -365,7 +368,7 @@ popd
 # Fix filename conflict
 mv %{buildroot}%{_bindir}/srconv %{buildroot}%{_bindir}/cs-srconv
 
-%if %{with_java}
+%if %{with java}
 # Put the java package where it should be and make sure csound can find it
 install -dm 755 %{buildroot}%{_javadir}
 (cd %{buildroot}%{_javadir}; ln -s %{_libdir}/csnd7.jar .)

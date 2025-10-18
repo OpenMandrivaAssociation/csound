@@ -5,7 +5,7 @@
 %define	libname		%mklibname %{name} %{major}
 %define	develname	%mklibname -d %{name}
 
-%define		gitdate	20250903
+%define		gitdate	20251017
 
 %bcond_without	manual
 # As with 7.0.0beta1 java build is disabled in the sources
@@ -18,7 +18,7 @@ Summary:		A sound synthesis language and library
 Name:		csound
 # Beta release
 Version:		7.0.0
-Release:		0.beta7
+Release:		0.beta9
 License:		LGPLv2+
 Group:		Sound
 Url:		https://csound.com
@@ -128,7 +128,7 @@ classical, pop, techno, ambient...
 %package -n %{libname}
 Summary:	Csound main library and plug-ins
 Group:		System/Libraries
-# Dropped plugins
+# Dropped plugins packages
 %rename	%{name}-fltk
 %rename	%{name}-fluidsynth
 %rename	%{name}-stk
@@ -336,6 +336,8 @@ find util1/sortex/ -name "*.c" -o -name "*.h" | xargs chmod 0644
 
 
 %build
+#-DLUA_LIBRARY="%%{_libdir}/libluajit-5.1.so" \
+#-DLUA_MODULE_INSTALL_DIR="%%{_libdir}" \
 %cmake \
 	-DBUILD_RELEASE=1 \
 	-DBUILD_UTILITIES=1 \
@@ -348,8 +350,6 @@ find util1/sortex/ -name "*.c" -o -name "*.h" | xargs chmod 0644
 	-DUSE_LIB64=1 \
 	-DUSE_CURL=1 \
 	-DUSE_GETTEXT=1 \
-	-DLUA_LIBRARY="%{_libdir}/libluajit-5.1.so" \
-	-DLUA_MODULE_INSTALL_DIR="%{_libdir}" \
 	-DLIBRARY_INSTALL_DIR="%{_libdir}"
 
 %make_build

@@ -1,0 +1,12 @@
+diff -rupN csound-20251118.old/CMakeLists.txt csound-20251118/CMakeLists.txt
+--- csound-20251118.old/CMakeLists.txt	2025-11-25 12:32:21.632191266 +0100
++++ csound-20251118/CMakeLists.txt	2025-11-25 12:33:39.294730968 +0100
+@@ -1677,7 +1677,7 @@ endif()
+ install(EXPORT CsoundExports
+     FILE "CsoundConfig.cmake"
+     NAMESPACE "Csound::"
+-    DESTINATION "${CMAKE_INSTALL_PREFIX}/share/csound"
++    DESTINATION "${CMAKE_INSTALL_PREFIX}/share/cmake/csound"
+ )
+ 
+ # configure and install pkg-config file

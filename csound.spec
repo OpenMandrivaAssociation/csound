@@ -5,7 +5,7 @@
 %define	libname		%mklibname %{name} %{major}
 %define	develname	%mklibname -d %{name}
 
-%define		gitdate	20251017
+%define		gitdate	20251118
 
 %bcond_without	manual
 # As with 7.0.0beta1 java build is disabled in the sources
@@ -18,7 +18,7 @@ Summary:		A sound synthesis language and library
 Name:		csound
 # Beta release
 Version:		7.0.0
-Release:		0.beta9
+Release:		0.beta10
 License:		LGPLv2+
 Group:		Sound
 Url:		https://csound.com
@@ -33,7 +33,7 @@ Patch0:		csound-7.0.0beta1-64bit-plugin-path.patch
 Patch1:		csound-7.0.0beta1-default-to-pulse.patch
 Patch2:		csound-7.0.0beta1-sse2.patch
 Patch3:		csound-7.0.0beta1-xdg-open.patch
-Patch4:		csound-7.0.0beta1-fix-cmake-files-path.patch
+Patch4:		csound-7.0.0beta10-fix-cmake-files-path.patch
 BuildRequires:		cmake >= 3.13.4
 BuildRequires:		bison
 BuildRequires:		doxygen
@@ -187,6 +187,7 @@ Contains headers and libraries for developing applications that use Csound.
 %{_includedir}/%{name}/*
 %{_libdir}/lib%{name}64.so
 #{_libdir}/libcsnd7.so
+%{_libdir}/pkgconfig/%{name}.pc
 %{_datadir}/cmake/csound/CsoundConfig.cmake
 %{_datadir}/cmake/csound/CsoundConfig-relwithdebinfo.cmake
 

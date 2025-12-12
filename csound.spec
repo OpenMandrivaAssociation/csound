@@ -18,7 +18,7 @@ Summary:		A sound synthesis language and library
 Name:		csound
 # Beta release
 Version:		7.0.0
-Release:		0.beta10
+Release:		0.1
 License:		LGPLv2+
 Group:		Sound
 Url:		https://csound.com

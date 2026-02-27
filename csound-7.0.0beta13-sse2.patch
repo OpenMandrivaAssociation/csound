@@ -1,6 +1,6 @@
-diff -rupN csound-20250719.old/cmake/CompilerOptimizations.cmake csound-20250719/cmake/CompilerOptimizations.cmake
---- csound-20250719.old/cmake/CompilerOptimizations.cmake	2025-07-22 18:30:19.334025400 +0200
-+++ csound-20250719/cmake/CompilerOptimizations.cmake	2025-07-22 21:06:42.982551850 +0200
+diff -rupN csound-20260218.old/cmake/CompilerOptimizations.cmake csound-20260218/cmake/CompilerOptimizations.cmake
+--- csound-20260218.old/cmake/CompilerOptimizations.cmake	2026-02-18 18:21:59.230759400 +0100
++++ csound-20260218/cmake/CompilerOptimizations.cmake	2026-02-18 18:39:25.757503099 +0100
 @@ -19,30 +19,6 @@ if (HAS_CXX_FAST_MATH AND NOT MINGW)
  endif()
  

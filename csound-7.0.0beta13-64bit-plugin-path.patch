@@ -1,7 +1,7 @@
-diff -rupN csound-20250719.old/CMakeLists.txt csound-20250719/CMakeLists.txt
---- csound-20250719.old/CMakeLists.txt	2025-07-22 18:30:19.280588000 +0200
-+++ csound-20250719/CMakeLists.txt	2025-07-22 20:28:21.492143150 +0200
-@@ -346,13 +346,7 @@ elseif(NOT DEFINED LIBRARY_INSTALL_DIR)
+diff -rupN csound-20260218.old/CMakeLists.txt csound-20260218/CMakeLists.txt
+--- csound-20260218.old/CMakeLists.txt	2026-02-18 18:21:59.197286600 +0100
++++ csound-20260218/CMakeLists.txt	2026-02-18 18:32:40.469908572 +0100
+@@ -367,13 +367,7 @@ elseif(NOT DEFINED LIBRARY_INSTALL_DIR)
  endif()
  message(STATUS "LIBRARY INSTALL DIR: ${LIBRARY_INSTALL_DIR}")
  
@@ -16,9 +16,9 @@ diff -rupN csound-20250719.old/CMakeLists.txt csound-20250719/CMakeLists.txt
  
  if(WIN32 AND NOT MSVC)
      if(EXISTS "C:/MinGW/include")
-diff -rupN csound-20250719.old/installer/misc/mkpackage.py csound-20250719/installer/misc/mkpackage.py
---- csound-20250719.old/installer/misc/mkpackage.py	2025-07-22 18:30:19.374730300 +0200
-+++ csound-20250719/installer/misc/mkpackage.py	2025-07-22 20:31:13.495373400 +0200
+diff -rupN csound-20260218.old/installer/misc/mkpackage.py csound-20260218/installer/misc/mkpackage.py
+--- csound-20260218.old/installer/misc/mkpackage.py	2026-02-18 18:21:59.271831300 +0100
++++ csound-20260218/installer/misc/mkpackage.py	2026-02-18 18:33:16.172409694 +0100
 @@ -27,7 +27,7 @@ libDir2     = libDir + '/csound/lib'
  # single precision plugin libraries
  pluginDir32 = libDir + '/csound/plugins'
@@ -28,10 +28,10 @@ diff -rupN csound-20250719.old/installer/misc/mkpackage.py csound-20250719/insta
  # documentation
  docDir      = instPrefix + '/share/doc/csound'
  # tclcsound.so
-diff -rupN csound-20250719.old/Top/csmodule.c csound-20250719/Top/csmodule.c
---- csound-20250719.old/Top/csmodule.c	2025-07-22 18:30:19.332471600 +0200
-+++ csound-20250719/Top/csmodule.c	2025-07-22 20:30:09.818201896 +0200
-@@ -159,9 +159,9 @@ static char haikudirs[] = "/boot/system/
+diff -rupN csound-20260218.old/Top/csmodule.c csound-20260218/Top/csmodule.c
+--- csound-20260218.old/Top/csmodule.c	2026-02-18 18:21:59.229093000 +0100
++++ csound-20260218/Top/csmodule.c	2026-02-18 18:34:20.551960487 +0100
+@@ -157,9 +157,9 @@ static char haikudirs[] = "/boot/system/
  #  define ENABLE_OPCODEDIR_WARNINGS 0
  #  ifndef CS_DEFAULT_PLUGINDIR
  #    ifndef USE_DOUBLE

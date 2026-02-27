@@ -5,7 +5,8 @@
 %define	libname		%mklibname %{name} %{major}
 %define	develname	%mklibname -d %{name}
 
-%define		gitdate	20251118
+# Beta 13 release
+%define		gitdate	20260218
 
 %bcond_without	manual
 # As with 7.0.0beta1 java build is disabled in the sources
@@ -16,9 +17,8 @@
 
 Summary:		A sound synthesis language and library
 Name:		csound
-# Beta release
 Version:		7.0.0
-Release:		0.1
+Release:		0.2
 License:		LGPLv2+
 Group:		Sound
 Url:		https://csound.com
@@ -29,11 +29,11 @@ Source0:	%{name}-%{gitdate}.tar.xz
 Source1:	https://github.com/csound/csound/releases/download/%{version}/Csound6.18.0_manual_html.zip
 %endif
 Source100:	csound.rpmlintrc
-Patch0:		csound-7.0.0beta1-64bit-plugin-path.patch
-Patch1:		csound-7.0.0beta1-default-to-pulse.patch
-Patch2:		csound-7.0.0beta1-sse2.patch
-Patch3:		csound-7.0.0beta1-xdg-open.patch
-Patch4:		csound-7.0.0beta10-fix-cmake-files-path.patch
+Patch0:		csound-7.0.0beta13-64bit-plugin-path.patch
+Patch1:		csound-7.0.0beta13-default-to-pulse.patch
+Patch2:		csound-7.0.0beta13-sse2.patch
+Patch3:		csound-7.0.0beta13-xdg-open.patch
+Patch4:		csound-7.0.0beta13-fix-cmake-files-path.patch
 BuildRequires:		cmake >= 3.13.4
 BuildRequires:		bison
 BuildRequires:		doxygen
@@ -46,6 +46,7 @@ BuildRequires:		gettext
 BuildRequires:		java-21-openjdk-module-jdk.jpackage
 BuildRequires:		java-21-openjdk-devel
 %endif
+BuildRequires:		make
 BuildRequires:		python
 BuildRequires:		swig >= 2.0
 BuildRequires:		xsltproc
@@ -80,6 +81,10 @@ BuildRequires:		pkgconfig(speex)
 BuildRequires:		pkgconfig(vorbis)
 BuildRequires:		pkgconfig(vorbisenc)
 BuildRequires:		pkgconfig(x11)
+BuildRequires:		python3dist(pyproject-api)
+BuildRequires:		python3dist(setuptools)
+BuildRequires:		python3dist(wheel)
+BuildRequires:		python3dist(hatchling)
 
 %description
 Csound is a sound and music synthesis system, providing facilities for
@@ -241,6 +246,7 @@ API documentation for the %{name}-java package.
 %doc COPYING
 %doc %{_javadocdir}/%{name}-java
 %endif
+# End of %%{with java}
 
 #-------------------------------------------------------------------------------
 

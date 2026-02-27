@@ -1,0 +1,21 @@
+diff -rupN csound-20260218.old/Top/csound.c csound-20260218/Top/csound.c
+--- csound-20260218.old/Top/csound.c	2026-02-18 18:21:59.229093000 +0100
++++ csound-20260218/Top/csound.c	2026-02-18 18:37:34.612316435 +0100
+@@ -2006,7 +2006,7 @@ static void reset(CSOUND *csound) {
+ #endif
+ #endif
+ #else
+-  strcpy(s, "alsa");
++  strcpy(s, "pulse");
+ #endif
+ 
+   csoundCreateConfigurationVariable(csound, "rtaudio", s, CSOUNDCFG_STRING, 0,
+@@ -2034,7 +2034,7 @@ static void reset(CSOUND *csound) {
+     strcpy(s, "portmidi");
+ #endif
+ #else
+-    strcpy(s, "alsa");
++    strcpy(s, "pulse");
+ #endif
+   else
+     strcpy(s, "hostbased");
